@@ -1,0 +1,224 @@
+﻿@inject IUnitOfWork unitOfWork
+@model JobCategoryListingResponseDto
+
+@{
+    ViewData["Title"] = "Blog Category";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var pageUrl = $"/JobCategory?count={Model.Params.RecordPerPage}&q={Model.Params.Q}";
+}
+
+<div class="dashboard_main">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        <h2>Job Category</h2>
+                    </div>
+                    @*<div class="heading_right">
+                        <a asp-area="" asp-controller="JobCategory" asp-action="Manage" class="btn-main add-page">
+                            <i class="fal fa-plus-circle"></i> Add New Category
+                        </a>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="dashboard_main_body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="db-worklog-filter db-task-box">
+
+                        <form method="get" asp-area="" asp-controller="JobCategory" asp-action="Index">
+                            <input type="hidden" name="sortBy" value="@Model.Params.SortBy" />
+                            <div class="parameter-section">
+                                <div class="row">
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Record Per Page</label>
+                                            <select name="count" class="form-control form-select">
+
+                                                @foreach (var pages in Pager.DisplayPages())
+                                                {
+                                                    @if (Model.Params.RecordPerPage == pages)
+                                                    {
+                                                        <option value="@pages" selected="selected">@pages</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@pages">@pages</option>
+                                                    }
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                   
+
+                                    @*<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Search</label>
+                                            <input type="text" name="q" class="form-control" value="@Model.Params.Q" placeholder="Search by name or slug" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6">
+                                        <button class="btn btn-main btn_search" type="submit">
+                                            <i class="far fa-search"></i> Search
+                                        </button>
+                                    </div>*@
+
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-12 mb-4 mt-4">
+                            <div class="row justify-content-between align-items-center" style="padding:0px 20px;">
+                                <div class="col-md-6">
+                                    <span class="display-total-record">Total Record: @Model.TotalRecord </span>
+                                </div>
+                                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                    <div class="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table_main">
+                        <table class="table table_style table-hover" id="blog-category-table">
+
+                            <thead class="cf">
+                                <tr>
+                                    <th>Id </th>
+                                    <th>Name </th>
+                                     <th>Last Update</th>
+                                    @*<th>Action</th>*@
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @if (Model != null && Model.Data != null && Model.Data.Count > 0)
+                                {
+
+                                    foreach (var jobCategory in Model.Data)
+                                    {
+                                        <tr>
+                                            <td>@jobCategory.Id</td>
+                                            <td>@jobCategory.CategoryName</td>                                                              
+                                            <td data-sort='@jobCategory.UpdatedOn.ToString("yyyyMMdd")'>@jobCategory.UpdatedOn.ToString("dd MMM, yyyy  |  hh:mm tt")</td>
+                                           
+
+                                            @*<td>
+
+                                                <a class="btn icon_btn" asp-area="" asp-controller="jobCategory" asp-action="Manage" asp-route-guid="@jobCategory.UniqueGuid"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                    <i class="fal fa-edit"></i>
+                                                </a>
+
+                                                @if (User.IsInRole("SuperAdmin"))
+                                                {
+                                                    <a class="btn btn-sm btn-danger delete-blog-category" href="#" data-href="/jobCategory/Delete/@jobCategory.Id"
+                                                       data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                                       data-bs-original-title="Delete" aria-label="Delete">
+                                                        <i class="fal fa-trash"></i>
+                                                    </a>
+                                                }
+                                            </td>*@
+                                        </tr>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <img src="~/themes/back-end/images/no_result.gif" class="no-result" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <partial name="_Pagination" view-data='@new ViewDataDictionary(ViewData) { { "pageURL", $"/jobCategory?q={Model.Params.Q}&sortBy={Model.Params.SortBy}&sortDirection={Model.Params.SortDirection}" }, {"totalRecord", Model.TotalRecord }, { "count", Model.Params.RecordPerPage }, { "pageNumber", Model.Params.Page } }' />
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+
+
+    @*<script>
+        $(document).on('click', '.delete-blog-category', function (e) {
+            e.preventDefault();
+            var _self = $(this);
+            bootbox.confirm({
+                title: "Confirm?",
+                message: "Are you sure for this action?",
+                centerVertical: false,
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel',
+                        className: 'btn-danger'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> Confirm',
+                        className: 'btn-success'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: _self.attr('data-href'), ,
+                            success: function (data) {
+                                if (data.success) {
+
+                                    toastr.success(data.msg);
+
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 2000);
+
+                                } else {
+                                    $('.ajax-loader').addClass('d-none');
+                                    toastr.error(data.msg);
+                                }
+
+                            },
+                            error: function (req, error) {
+                                toastr.error(req.responseText);
+                                $('.ajax-loader').addClass('d-none');
+                            },
+                            beforeSend: function (data) {
+                                $('.ajax-loader').removeClass('d-none');
+                            }
+                        });
+
+                    }
+                }
+            });
+        });
+
+    </script>*@
+
+}
+
+

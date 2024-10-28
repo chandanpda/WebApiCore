@@ -1,0 +1,108 @@
+p {
+    line-height: 31px;
+}
+
+/* UPDATED BY SHISHIR 18012023 */
+.badge-cta .use_case_each {
+    padding: 20px 15px;
+}
+
+.badge-cta .use_case_each:hover {
+    border-right: 2px solid #eee;
+    background-color: #fafafa;
+}
+
+.badge-cta .use_case_each:last-child:hover {
+    border-right: none;
+}
+
+.round-box {
+    background-color: var(--gray-color);
+    padding: 30px;
+}
+
+.round-box:hover {
+    color: var(--first-color);
+}
+
+.round-box-l {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #fff;
+    -webkit-transition: 0.3s all ease-in-out;
+    transition: 0.3s all ease-in-out;
+}
+
+.round-box:hover .round-box-l {
+    background-color: var(--second-color);
+    color: #fff;
+}
+
+.round-box.left {
+    border-radius: 100px 0px 0px 100px;
+}
+
+.round-box.right {
+    border-radius: 0px 100px 100px 0px;
+}
+
+.round-box.left .round-box-l,
+.round-box.right .round-box-l {
+    margin-right: 20px;
+}
+
+.round-box .round-box-l span {
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.round-box-r {
+    flex: 1;
+}
+
+.green-color {
+    color: var(--second-color);
+}
+
+.build-badge-block .btn-main {
+    border-radius: 30px;
+    padding: 18px 45px !important;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.check-list {
+    margin-left: 19px;
+}
+
+@media(min-width:767px) {
+    .build-badge-block .sub-heading {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .round-box-r p {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .highlighted-section ul li {
+        line-height: 31px;
+    }
+
+}
+
+@media (max-width:767px) {
+    .build-badge-block {
+        text-align: center;
+    }
+
+}
+
+
+.use_case_heading_text {
+    display: block;
+}
+
+/* UPDATED BY SHISHIR 18012023 */

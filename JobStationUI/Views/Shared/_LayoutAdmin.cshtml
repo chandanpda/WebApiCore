@@ -1,0 +1,126 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/themes/back-end/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/themes/back-end/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+    <link href="~/themes/back-end/css/main-style.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/lib/toastr/css/toastr.min.css" />
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .sticky-button-section {
+            background-color: #e9f4ff;
+            position: sticky;
+            bottom: 0px;
+            z-index: 9;
+            height: 60px;
+            padding: 9px;
+            border: 1px solid #cce6ff;
+        }
+    </style>
+    <style>
+        .profile-icon {
+            position: absolute;
+            right: 18%;
+            text-align: right;
+        }
+
+            .profile-icon img {
+                width: 42px;
+                height: 42px;
+            }
+
+            .profile-icon .user-name {
+                font-size: 16px;
+                font-weight: 500;
+                padding-right: 10px;
+            }
+
+            .profile-icon .role-type {
+                font-size: 12px;
+                color: #938a8a;
+            }
+
+
+            .profile-icon ul {
+                list-style: none;
+                height: 42px;
+            }
+
+                .profile-icon ul li {
+                    float: left;
+                }
+
+            .profile-icon .user-name p {
+                margin-bottom: 0px;
+            }
+    </style>
+</head>
+<body>
+    <partial name="_AdminLeftMenu.cshtml" />
+    <div class="dashboard_main_container">
+        <header class="topbar shadow-sm d-xl-block d-none">
+            <div class="chart-container">
+                <nav class="navbar navbar-expand-lg p-0">
+                    <ul class="navbar-nav">
+                       
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        @RenderBody()
+    </div>
+
+  
+
+    <partial name="_AjaxLoader.cshtml" />
+    <script src="~/themes/back-end/js/jquery-2.2.1.min.js"></script>
+    <script src="~/themes/back-end/js/popper.min.js"></script>
+    <script src="~/themes/back-end/js/bootstrap.min.js"></script>
+    <script src="~/lib/toastr/js/toastr.min.js"></script>
+    <script src="~/lib/bootbox/js/bootbox.min.js"></script>
+    <partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+  
+
+    <script>
+        $(document).on('click', '.toggle_span', function (e) {
+            e.stopPropagation();
+            var dataId = $(this).attr('data-id') || '';
+            if (dataId !== '') {
+                $('.mapping_list_collapse').removeClass('show');
+                $('.mapping_list_collapse[data-id="' + dataId + '"]').toggleClass('show');
+            }
+        });
+
+        $(document).on('click', 'body', function (e) {
+            $('.mapping_list_collapse').removeClass('show');
+        });
+
+        $(document).on('click', '.close-modal', function (e) {
+            e.preventDefault();
+            var modalId = $(this).attr('data-modal-id') || '';
+            if (modalId !== '') {
+                $('#' + modalId).modal('hide');
+            }
+        });
+
+    </script>
+
+  
+</body>
+</html>

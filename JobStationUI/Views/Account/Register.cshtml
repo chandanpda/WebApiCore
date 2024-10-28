@@ -1,0 +1,160 @@
+﻿@model RegisterModel
+@inject IUnitOfWork unitOfWork
+@{
+    ViewBag.Title = "Register - JobStation";
+    ViewBag.Keyword = "";
+    ViewBag.Description = "JobStation";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var errors = ViewData.ModelState.SelectMany(x => x.Value.Errors);
+
+    /*To Be implemented Later var googleReCaptchaSiteKey = "";
+    var response = await unitOfWork.WebsiteSettingService.GetById(1);
+    if (response != null && response.StatusCode == System.Net.HttpStatusCode.OK && response.Data.Data != null)
+    {
+        var globalData = response.Data.Data;
+        googleReCaptchaSiteKey = globalData.GoogleRecaptchaSiteKey ?? "";
+    }*/
+}
+
+<div class="dashboard_main">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        <h2>Create New User Profile</h2>
+                    </div>
+                    <div class="heading_right">
+                        <a asp-area="" asp-controller="Account" asp-action="RegisterUserList" class="btn-main add-page">
+                            <i class="fa fa-arrow-circle-left"></i> Back to Register Users Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_main_body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-6">
+                    <div class="profile_edit">
+                        <form asp-controller="Account" asp-action="Register" method="post" id="RegisterForm">
+                            @if (errors != null)
+                            {
+                                <div class="validation-summary-errors">
+                                    <ul>
+                                        @foreach (var error in errors)
+                                        {
+                                            <li>
+                                                @Html.Raw(error.ErrorMessage)
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <input type="text" asp-for="UserName" class="form-control" placeholder="Full Name*" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="Email" class="form-control" placeholder="Email*" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="Phone*" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" asp-for="Password" class="form-control" placeholder="Password*" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password*" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+                                <div class="form-group">
+                                    <label>Roles</label>
+                                    <select asp-for="RoleName" class="form-control form-select">
+                                        @foreach (var st in UserRoles.GetUserRolesType())
+                                        {
+                                            <option value="@st.Value">@st.Key</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            @*to implement later
+                                <div class="col-md-12">
+                                <div class="form-group apply-form-design" style="margin-top: 8px;">
+                                    <div class="g-recaptcha" data-sitekey='@googleReCaptchaSiteKey' data-callback="onReturnCallback" data-theme="light"></div>
+                                    <span id="recaptcha-error-contact-form" class="recaptcha-error" style="display:none;">
+                                        Verify you are not a robot!
+                                    </span>
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                <a asp-area="" asp-controller="Account" asp-action="Login">
+                                    Already have an account? Login
+                                </a>
+                            </div>
+
+                            <button id="btnSubmitLogin" type="submit" class="btn-main btn-blue text-white">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts{
+
+    <partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
+    <partial name="~/Views/Shared/_AjaxLoader.cshtml" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+
+        $(document).on('submit', '#RegisterForm', function () {
+            var result = ValidateReCaptcha();
+            if (result == true)
+                $('.ajax-loader').removeClass('d-none');
+
+            return result;
+        });
+
+        function ValidateReCaptcha() {
+
+            var response = grecaptcha.getResponse();
+
+            if (response.length == 0) {
+                //reCaptcha not verified
+                $("#val-message").show();
+                return false;
+            }
+            else {
+                //reCaptch verified
+                $("#val-message").hide();
+                return true;
+            }
+        }
+
+        var onReturnCallback = function (response) {
+            ValidateReCaptcha();
+        };
+
+    </script>
+}

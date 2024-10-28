@@ -1,0 +1,361 @@
+@import "var";
+@import "mixin";
+
+.home-slider {
+    & .carousel-caption {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        z-index: 1;
+        margin: 230px 0;
+        opacity: 0;
+        text-align: center;
+
+        & h1 {
+            font-size: 3.6rem;
+            line-height: 4.6rem;
+            margin: 0 0 10px;
+            color: #fff;
+
+            & i {
+                font-style: normal;
+            }
+        }
+
+        & p {
+            font-size: 1.7rem;
+            line-height: 2.8rem;
+            color: #fff;
+        }
+
+    }
+
+    & .carousel-item {
+        background: $gradient;
+        display: table;
+        transition: 0.3s all;
+        position: relative;
+
+        &::before {
+            @include using-pseudo;
+            background-image: url(../images/home-banner-bg.webp);
+            @include background(unset);
+            background-position: center right;
+            opacity: 0.4;
+        }
+
+        &.active .carousel-caption {
+            opacity: 1;
+
+            & h1,
+            & p {
+                animation-name: fadeInUp;
+            }
+        }
+    }
+}
+
+.find-form {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+
+    & form {
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    & .form-control {
+        min-height: 50px;
+        border-radius: 0px;
+        font-size: 13px;
+        border: none;
+    }
+
+    & .input-group-append {
+        @include flex(center, center);
+        background-color: #fff;
+        color: $first-color;
+        padding: 0px 12px;
+    }
+
+    & .input-group {
+        border: 1px solid #eee;
+    }
+
+    & .find-form-btn {
+        & .btn-main {
+            padding: 5px 10px;
+            border-radius: 0px;
+            position: static;
+        }
+    }
+
+}
+
+.special-single {
+    & .special-ico {
+        width: 90px;
+        height: 90px;
+        @include flex(center, center);
+        margin: 0 auto 10px;
+        background-color: $grey-bg-color;
+        border: 1px solid #e1e8f7;
+        border-radius: 50%;
+    }
+
+    & .special-head {
+        font-size: 16px;
+        line-height: 27px;
+    }
+}
+
+.auto-height {
+    min-height: calc(100% - 30px);
+    margin: 30px 0 0;
+}
+
+.app-module {
+    & .app-thumb {
+        margin: -40px 0;
+        @include top-relative;
+    }
+}
+
+.faq-block {
+    & .card {
+        border: none;
+        border-top: 1px solid #ddd;
+        padding: 20px 0;
+    }
+
+    & .card-header {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+    }
+
+    & .faq-ques {
+        flex: 1;
+    }
+
+    & .btn-block {
+        padding: 0;
+        font-weight: 600;
+        font-size: 1.8rem;
+        color: $second-color;
+        background-color: transparent;
+        position: relative;
+        @include flex (center, space-between);
+        width: 100%;
+        text-align: left;
+        text-decoration: none;
+
+        &.collapsed {
+            color: $first-color;
+        }
+
+        &:focus,
+        &:hover {
+            box-shadow: none;
+            text-decoration: none;
+        }
+
+        & .round span:nth-child(1) {
+            transform: rotate(-45deg);
+            display: block;
+            position: absolute;
+            left: 27%;
+            bottom: 35%;
+        }
+
+        & .round span:nth-child(2) {
+            transform: rotate(45deg);
+            display: block;
+            position: absolute;
+            left: 43%;
+            bottom: 35%;
+        }
+
+        & .round {
+            position: relative;
+            width: 45px;
+            height: 30px;
+        }
+
+        & .round span {
+            z-index: 9;
+            height: 2px;
+            margin: 1px;
+            width: 10px;
+            background: $first-color;
+            transition: 0.3s all ease-in-out;
+        }
+    }
+
+    & .collapsed.btn-block .round span {
+        background: $second-color;
+    }
+
+    & .collapsed.btn-block .round span:first-child {
+        transform: rotate(45deg);
+    }
+
+    & .collapsed.btn-block .round span:nth-child(2) {
+        transform: rotate(-45deg);
+    }
+
+    & .card-body {
+        padding: 15px 0 0;
+    }
+}
+
+
+.flex-btn {
+    @include flex(center, flex-start);
+    gap: 8px;
+}
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.custom-wow {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+
+    &.animated {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.custom-wow.animated {
+    &.fadeInUp {
+        animation-name: fadeInUp;
+    }
+
+    &.fadeInRight {
+        animation-name: fadeInRight;
+    }
+
+    &.fadeInLeft {
+        animation-name: fadeInLeft;
+    }
+
+    &.fadeInDown {
+        animation-name: fadeInDown;
+    }
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+
+    &.delay-1s {
+        animation-delay: 1s;
+    }
+
+    &.delay-1-2s {
+        animation-delay: 1.2s;
+    }
+
+    &.delay-1-3s {
+        animation-delay: 1.3s;
+    }
+
+    &.delay-1-4s {
+        animation-delay: 1.4s;
+    }
+
+    &.delay-1-6s {
+        animation-delay: 1.6s;
+    }
+}
+
+.pad-80 {
+    padding: 80px 0;
+}
+
+@media (max-width: $ipad-pro) {
+    .home-slider {
+
+        & .carousel-caption {
+            margin: 150px 0px;
+        }
+    }
+}
+
+@media (max-width: $ipad-pro) {}
+
+@media (max-width: $ipad) {
+    .pad-80 {
+        padding: 40px 0;
+    }
+}
+
+@media (max-width: $mobile) {
+
+    .home-slider {
+
+        & .carousel-caption {
+            margin: 90px 0 40px;
+        }
+
+        & .carousel-item::before {
+            background-position: -1040px center;
+            opacity: 0.2;
+        }
+    }
+
+    .app-module .app-thumb {
+        margin: 0px 0 40px;
+    }
+}

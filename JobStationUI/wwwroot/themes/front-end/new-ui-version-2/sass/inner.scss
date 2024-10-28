@@ -1,0 +1,350 @@
+@import "var";
+@import "mixin";
+
+.inner-banner-bg {
+    & .home-slider .carousel-caption {
+        margin: 150px 0 100px;
+
+        & h1 {
+            font-size: 3rem;
+            line-height: 4rem;
+        }
+    }
+}
+
+.filter-block {
+    & .fa-star {
+        color: #ffb326;
+    }
+
+    & .btn-link {
+        font-size: 16px;
+
+        & .round {
+            width: 35px;
+        }
+    }
+}
+
+.slideroutput {
+    margin-left: -20px;
+    background-color: $third-color;
+    color: #fff;
+    width: 40px;
+    height: 30px;
+    @include flex(center, center);
+    position: absolute;
+    bottom: 100%;
+}
+
+
+.range-wrap {
+    position: relative;
+    margin: 0 auto 3rem;
+}
+
+.bubble {
+    background: $third-color;
+    color: #fff;
+    padding: 4px;
+    position: absolute;
+    border-radius: 4px;
+    transform: translateX(-50%);
+    top: 100%;
+    width: 46px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bubble::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-bottom: 5px solid $third-color;
+}
+
+.bubble::after {
+    content: attr(data-range-value);
+    margin-left: 1px;
+}
+
+.search-result {
+    & .form-check-input {
+        width: 20px;
+        height: 20px;
+    }
+
+    & .search-value {
+        font-size: 2.2rem;
+        line-height: 3.2rem;
+        margin: 0;
+        color: $third-color;
+    }
+
+    & p {
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    & .btn-main {
+        padding: 8px 15px;
+        font-size: 14px;
+        display: block;
+    }
+
+    &.premium {
+        & .search-count {
+            filter: blur(5px);
+        }
+    }
+}
+
+.location-modal {
+    & .modal-content {
+        padding: 120px 0px 60px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        border-radius: 20px;
+        overflow: hidden;
+
+        &::before {
+            @include using-pseudo;
+            background-image: url(../images/buildings.svg);
+            width: 70%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+
+    & .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border: none;
+        border-radius: 0 0 0 10px;
+        color: #fff;
+        font-size: 25px;
+        background-color: $second-color;
+    }
+
+    & .form-control {
+        background-color: #faf9fc;
+        min-height: 55px;
+        border: 2px solid #253863;
+    }
+}
+
+
+.state-list {
+    & .nav-tabs {
+        justify-content: space-between;
+        background-color: #faf9fc;
+        margin: 0 0 40px;
+        flex-wrap: nowrap;
+
+        & .nav-item {
+            margin: 0;
+            width: auto;
+            padding: 0;
+
+            & .nav-link {
+                color: #222;
+                min-width: 40px;
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: 4px;
+                    background-color: $third-color; // Set your desired background color
+                    transform-origin: top right;
+                    transform: scaleX(0) scaleY(1);
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                &::before {
+                    transform-origin: top left;
+                }
+
+                &:hover::before,
+                &:hover::after {
+                    transform-origin: top left;
+                    transform: scaleX(1) scaleY(1);
+                }
+
+                &.active {
+                    color: $third-color;
+
+                    &::after,
+                    &::before {
+                        transform-origin: top left;
+                        transform: scaleX(1) scaleY(1);
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.roatation {
+    perspective: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roatation img {
+    transform: rotateY(0deg);
+    animation: rotateAnimation 10s linear infinite;
+    transition: 0.3s all ease-in-out;
+}
+
+
+@keyframes rotateAnimation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateY(-5deg);
+    }
+
+    50% {
+        transform: rotateY(0deg);
+    }
+
+    75% {
+        transform: rotateY(5deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+.round-box {
+    background-color: $grey-bg-color;
+    padding: 25px;
+
+    &:hover {
+        color: $first-color;
+
+        & .round-box-l {
+            background-color: $third-color;
+            color: #fff;
+        }
+    }
+
+    .round-box-l {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        font-weight: 800;
+        font-size: 3rem;
+        background-color: #fff;
+        -webkit-transition: 0.3s all ease-in-out;
+        transition: 0.3s all ease-in-out;
+
+        &::after {
+            content: attr(data-count-single);
+        }
+    }
+
+    &.left {
+        border-radius: 100px 0px 0px 100px;
+    }
+
+    &.right {
+        border-radius: 0px 100px 100px 0px;
+    }
+
+    &.left .round-box-l,
+    &.right .round-box-l {
+        margin-right: 20px;
+    }
+
+    .round-box-r {
+        flex: 1;
+    }
+}
+
+.go-top {
+    opacity: 1;
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    justify-content: flex-start;
+
+    & p {
+        cursor: pointer;
+        margin: 0;
+    }
+}
+
+
+@media (max-width: $ipad-pro) {
+    .inner-banner-bg {
+        & .home-slider .carousel-caption {
+            margin: 100px 0 80px;
+
+        }
+    }
+}
+
+@media (max-width: $ipad) {
+    .location-modal .modal-content {
+        padding: 60px 0px 40px;
+    }
+}
+
+@media (max-width: $mobile) {
+    .inner-banner-bg {
+        & .home-slider .carousel-caption {
+            margin: 80px 0 40px;
+
+        }
+
+        & .home-slider .carousel-item::before {
+            background-position: -220px center;
+        }
+    }
+
+    .location-modal .modal-content::before {
+        width: 100%;
+        opacity: 0.3;
+    }
+
+    .location-modal .modal-content {
+        padding: 40px 0px;
+    }
+
+    .round-box {
+        padding: 15px;
+
+        & .round-box-l {
+            width: 80px;
+            height: 80px;
+        }
+
+    }
+
+}

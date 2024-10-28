@@ -1,0 +1,122 @@
+﻿@{
+    string pageUrl = ViewData["pageURL"] == null ? "" : ViewData["pageURL"].ToString();
+    Int32 totalNumberOfRecord = ViewData["totalRecord"] == null ? 0 : Convert.ToInt32(ViewData["totalRecord"]);
+    Int32 recordPerPage = ViewData["count"] == null ? 10 : Convert.ToInt32(ViewData["count"]);
+    Int32 currentPageNumber = ViewData["pageNumber"] == null ? 1 : Convert.ToInt32(ViewData["pageNumber"]);
+
+    int numberOfPageItems = ViewData["numberOfPageItems"] == null ? 10 : Convert.ToInt32(ViewData["numberOfPageItems"]);
+
+    var previousPageLink = pageUrl.Contains("?") ? pageUrl + "&page=" + (currentPageNumber - 1) + "&count=" + recordPerPage : pageUrl + "?page=" + (currentPageNumber - 1) + "&count=" + recordPerPage;
+    var nextPageLink = pageUrl.Contains("?") ? pageUrl + "&page=" + (currentPageNumber + 1) + "&count=" + recordPerPage : pageUrl + "?page=" + (currentPageNumber + 1) + "&count=" + recordPerPage;
+    var pageNumberLink = pageUrl.Contains("?") ? pageUrl + "&count=" + recordPerPage + "&page=" : pageUrl + "?count=" + recordPerPage + "&page=";
+
+    int startNumber = (((currentPageNumber == 0 ? 1 : currentPageNumber) - 1) * recordPerPage) + 1;
+    int endNumber = (startNumber - 1) + recordPerPage;
+}
+<style>
+
+    .pagination_main {
+        padding: 0 0 30px 0;
+        text-align: center;
+    }
+
+        .pagination_main .pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            border-radius: 0.25rem;
+            padding-right: 0;
+            justify-content: right;
+        }
+
+        .pagination_main .page-link {
+            background-color: #d4dbe9;
+            border: none;
+            margin: 0px 1px;
+            min-width: 40px;
+            border-radius: 4px;
+            color: #256625;
+        }
+
+        .pagination_main .active .page-link {
+            background-color: #4c84ff;
+        }
+
+    @@media(max-width:767px) {
+        .pagination_main .pagination {
+            justify-content: center;
+        }
+
+        .showing-ome-of-some {
+            text-align: center;
+        }
+
+        .pagination_main .page-link {
+            font-size: 14px;
+            min-width: 25px;
+        }
+
+        .page-link {
+            padding: 0.17rem 0.5rem;
+        }
+    }
+</style>
+
+@if (totalNumberOfRecord > recordPerPage)
+{
+    var pager = new Pager(totalNumberOfRecord, currentPageNumber, recordPerPage, numberOfPageItems);
+
+    <div class="row mt-3">
+
+        <div class="col-md-6 showing-ome-of-some">
+
+            <p>
+                Showing @startNumber to @endNumber of @totalNumberOfRecord entries
+            </p>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="pagination_main">
+
+                <ul class="pagination">
+
+                    @if (currentPageNumber > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link page_prev paging-link" data-page-no="@(currentPageNumber - 1)" href="@previousPageLink">Previous</a>
+                        </li>
+                    }
+
+                    @foreach (var pageNumber in pager.Pages)
+                    {
+                        if (pageNumber == currentPageNumber)
+                        {
+                            <li class="page-item active">
+                                <a class="page-link">@pageNumber</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="page-item">
+                                <a class="page-link paging-link" data-page-no="@pageNumber" href="@{@pageNumberLink}@{@pageNumber}">@pageNumber</a>
+                            </li>
+                        }
+                    }
+
+                    @if (currentPageNumber < pager.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link page_next paging-link" data-page-no="@(currentPageNumber + 1)" href="@nextPageLink">Next</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+

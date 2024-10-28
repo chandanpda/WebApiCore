@@ -1,0 +1,179 @@
+@import "var";
+@import "mixin";
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0 !important;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+html,
+body {
+    overflow-x: clip !important;
+}
+
+body {
+    font-family: $primary-font;
+    margin: 0.01rem auto 0;
+    padding: 0;
+    color: $first-color;
+    font-size: 15px;
+    width: 100%;
+    font-weight: 400;
+    background: $gradient;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &::before {
+        @include using-pseudo;
+        background-image: url(../images/login-bg.webp);
+        @include background(unset);
+        background-position: center right;
+        opacity: 0.4;
+        pointer-events: none;
+    }
+}
+
+b,
+strong {
+    font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $second-color;
+    font-weight: 700;
+}
+
+p {
+    margin: 0 0 8px;
+}
+
+a,
+button,
+input[type="submit"] {
+    color: $third-color;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.3s all ease-in-out;
+}
+
+a:focus,
+a:hover,
+button:focus,
+button:hover {
+    color: $second-color;
+    text-decoration: none;
+    outline: 0 !important;
+}
+
+.row>*,
+.container,
+.container-fluid,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
+    padding: 0 15px;
+}
+
+.row {
+    margin: 0 -15px;
+}
+
+.heading {
+    font-size: 2.8rem;
+    line-height: 3.8rem;
+    margin: 0 0 30px;
+
+    & i {
+        font-style: normal;
+        color: $third-color;
+    }
+}
+
+.form-control,
+.form-select {
+    min-height: 50px;
+    border: 1px solid #eee;
+    font-size: 1.4rem;
+    padding: 10px 15px;
+    background-color: #fff;
+
+    &:focus {
+        box-shadow: none;
+        background-color: #fff;
+        border-color: $second-color;
+    }
+}
+
+.btn-main {
+    background-color: $second-color;
+    border: 1px solid $second-color;
+    color: #fff;
+    padding: 12px 30px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    top: 0;
+
+    &:focus,
+    &:hover {
+        color: #fff;
+        background-color: $third-color;
+        border: 1px solid $third-color;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        top: -3px;
+    }
+}
+
+.input-group-append {
+    @include flex(center, center);
+    background-color: #fff;
+    color: $second-color;
+    padding: 0px 15px;
+}
+
+.input-group {
+    border: 1px solid #eee;
+
+    & .form-control {
+        border: none;
+    }
+}
+
+.login-module {
+    background-color: rgba(255, 255, 255, 0.9);
+    @include top-relative;
+}
+
+
+
+@media (max-width: $ipad-pro) {
+    html {
+        font-size: 60%;
+    }
+}
+
+@media (max-width: $ipad) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: $mobile) {}

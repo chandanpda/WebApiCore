@@ -13,5 +13,6 @@ namespace JobStationUI.Services.Interfaces
         ICategoryService CategoryService { get; }
         IAccountService AccountService { get; }
         ILogInHistoryService LogInHistoryService { get; }
+        IJobTypeService JobTypeService { get; }
     }
 }

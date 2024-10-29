@@ -19,6 +19,7 @@ namespace JobStationUI
             services.AddScoped<IClaimsService, ClaimsService>();
             services.AddScoped<ILogInHistoryService, LogInHistoryService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IJobTypeService, JobTypeService>();
             return services;
         }
     }

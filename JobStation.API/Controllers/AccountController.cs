@@ -26,13 +26,13 @@ namespace JobStation.API.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration configuration;
-        private readonly IunitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
         public AccountController(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
-            IunitOfWork unitOfWork,
+            IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             this.userManager = userManager;

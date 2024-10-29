@@ -7,22 +7,28 @@ using System.Threading.Tasks;
 
 namespace JobStation.Core
 {
-    public class unitOfWork :IunitOfWork
+    public class UnitOfWork :IUnitOfWork
     {
         public AppDbContext _context { get; }
         public IJobCategoryRepository JobCategory { get; }
         public IUserRepository UserRepository { get; }
         public ILogInHistoryRepository LogInHistoryRepository { get; }
+        public IErrorLogHistoryRepository ErrorLogHistory { get; }
+        public IJobTypeRepository JobTypeRepository { get; }
 
-        public unitOfWork(AppDbContext context,
+        public UnitOfWork(AppDbContext context,
             IJobCategoryRepository jobCategory,
             IUserRepository userRepository,
-            ILogInHistoryRepository logInHistoryRepository)
+            ILogInHistoryRepository logInHistoryRepository,
+            IErrorLogHistoryRepository errorLogHistoryRepository,
+            IJobTypeRepository jobTypeRepository)
         {
             _context = context;
             JobCategory =  jobCategory;
             UserRepository = userRepository;
             LogInHistoryRepository = logInHistoryRepository;
+            ErrorLogHistory = errorLogHistoryRepository;
+            JobTypeRepository = jobTypeRepository;
         }
         public int SaveChanges()
         {

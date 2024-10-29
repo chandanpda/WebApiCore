@@ -16,6 +16,7 @@ namespace JobStationUI
             route.MapControllerRoute("AdminController", "Admin/{action}/{id?}", new { controller = "Admin", action = "Index" });
 
             route.MapControllerRoute("Category", "Category/{action}/{id?}", new { controller = "Category", action = "Index" });
+            route.MapControllerRoute("JobType", "JobType/{action}/{id?}", new { controller = "JobType", action = "Index" });
             return route;
         }
     }

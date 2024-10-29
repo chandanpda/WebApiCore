@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace JobStation.Core
 {
-    public interface IunitOfWork :IDisposable
+    public interface IUnitOfWork :IDisposable
     {
         IJobCategoryRepository JobCategory { get; }
 
         IUserRepository UserRepository { get; }
         ILogInHistoryRepository LogInHistoryRepository { get; }
+        IErrorLogHistoryRepository ErrorLogHistory { get; }
+        IJobTypeRepository JobTypeRepository { get; }
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }

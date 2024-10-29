@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\JobStation.API",
+    "\\JobStation.API\\Controllers",
+    "\\JobStation.Core",
+    "\\JobStationUI",
+    "\\JobStationUI\\Views",
+    "\\JobStationUI\\Views\\JobType"
+  ],
+  "SelectedNode": "\\JobStation.sln",
+  "PreviewInSolutionExplorer": false
+}

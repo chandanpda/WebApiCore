@@ -82,6 +82,20 @@ namespace JobStationUI.Services
             return roles;
         }
 
+        public string GetTimeZone(string timeZoneId = "")
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(timeZoneId))
+                    return timeZoneId;
+
+                return claims?.First(claim => claim.Type == "TimeZoneId")?.Value;
+            }
+            catch
+            {
+                return "";
+            }
+        }
         //private UserDto GetUserDetails()
         //{
         //    var user = new UserDto();

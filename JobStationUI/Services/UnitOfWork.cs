@@ -16,6 +16,8 @@ namespace JobStationUI.Services
         public IHttpService HttpService { get; }
         public IAccountService AccountService { get; }
         public ILogInHistoryService LogInHistoryService { get; }
+        public IJobTypeService JobTypeService { get; }
+
 
 
         public UnitOfWork( IActiveMenuService activeMenuService,
@@ -23,13 +25,15 @@ namespace JobStationUI.Services
             IClaimsService claimsService,
             IHttpService httpService,
             IAccountService accountService,
-            ILogInHistoryService logInHistoryService)
+            ILogInHistoryService logInHistoryService,
+            IJobTypeService jobTypeService)
         {
             ActiveMenuService = activeMenuService;
             CategoryService = categoryService;
             ClaimsService = claimsService;
             AccountService = accountService;
             LogInHistoryService = logInHistoryService;
+            JobTypeService = jobTypeService;
         }
              
     }

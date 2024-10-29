@@ -12,19 +12,18 @@ namespace JobStation.Core
         {
 
         }
+       
 
-        public virtual DbSet<JobCategory> JobCategories { get; set; }
-        public virtual DbSet<JobType> JobTypes { get; set; }
-        public virtual DbSet<JobOffer> JobOffers { get; set; }
+        public DbSet<JobCategory> JobCategories { get; set; }
+        public DbSet<JobType> JobTypes { get; set; }
+        public  DbSet<JobOffer> JobOffers { get; set; }
+        public  DbSet<JobLocation> JobLocations { get; set; }
+        public  DbSet<JobSeekerProfile> JobSeekerProfiles { get; set; }
 
-        public virtual DbSet<JobLocation> JobLocations { get; set; }
+        public  DbSet<OrganisationDetails> OrganisationDetails { get; set; }
 
-        public virtual DbSet<JobSeekerProfile> JobSeekerProfiles { get; set; }
-
-        public virtual DbSet<OrganisationDetails> OrganisationDetails { get; set; }
-
-        public virtual DbSet<SeekerSkillList> SeekerSkillLists { get; set; }
-        public virtual DbSet<SkillList> SkillLists { get; set; }
+        public  DbSet<SeekerSkillList> SeekerSkillLists { get; set; }
+        public  DbSet<SkillList> SkillLists { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

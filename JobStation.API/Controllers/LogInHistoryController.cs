@@ -12,9 +12,9 @@ namespace JobStation.API.Controllers
 {
     public class LogInHistoryController : ControllerBase
     {
-        private readonly IunitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public LogInHistoryController(IunitOfWork unitOfWork
+        public LogInHistoryController(IUnitOfWork unitOfWork
             )
         {
             this.unitOfWork = unitOfWork;

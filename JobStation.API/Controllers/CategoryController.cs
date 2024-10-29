@@ -20,10 +20,10 @@ namespace JobStation.API.Controllers
     [Route("[controller]")]
     public class CategoryController : ControllerBase
     {
-        private readonly IunitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public CategoryController(IunitOfWork unitOfWork,
+        public CategoryController(IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             this.unitOfWork = unitOfWork;

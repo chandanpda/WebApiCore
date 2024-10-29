@@ -41,7 +41,7 @@ namespace JobStation.Core.EntityConfiguration
             .IsRequired();
 
             builder.Property(x => x.Mobile)
-            .HasColumnName("Title")
+            .HasColumnName("Mobile")
             .HasColumnType("nvarchar")
             .HasMaxLength(100)
             .IsRequired();
@@ -94,7 +94,7 @@ namespace JobStation.Core.EntityConfiguration
             builder.Property(x => x.CompanyName)
             .HasColumnName("CompanyName")
             .HasColumnType("nvarchar")
-            .HasMaxLength(100));
+            .HasMaxLength(100);
 
             builder.Property(x => x.Location)
             .HasColumnName("Location")

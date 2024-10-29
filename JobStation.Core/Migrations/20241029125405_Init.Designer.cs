@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobStation.Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240913125627_initialMigration")]
-    partial class initialMigration
+    [Migration("20241029125405_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,6 +124,45 @@ namespace JobStation.Core.Migrations
                     b.ToTable("JobCategory");
                 });
 
+            modelBuilder.Entity("JobStation.Core.Domain.JobLocation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTimeOffset>("AddedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("AddedOn")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("City");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("State");
+
+                    b.Property<string>("UniqueGuid")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("UniqueGuid")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobLocation");
+                });
+
             modelBuilder.Entity("JobStation.Core.Domain.JobOffer", b =>
                 {
                     b.Property<int>("Id")
@@ -132,10 +171,11 @@ namespace JobStation.Core.Migrations
                         .HasColumnName("Id")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CategoryId")
-                        .HasMaxLength(50)
-                        .HasColumnType("int")
-                        .HasColumnName("CategoryId");
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Company");
 
                     b.Property<DateTimeOffset>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -153,13 +193,23 @@ namespace JobStation.Core.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Experience");
 
-                    b.Property<string>("JobType")
+                    b.Property<bool>("IsActive")
+                        .HasMaxLength(5)
+                        .HasColumnType("bit")
+                        .HasColumnName("IsActive");
+
+                    b.Property<int>("JobCategoryId")
+                        .HasMaxLength(50)
+                        .HasColumnType("int")
+                        .HasColumnName("CategoryId");
+
+                    b.Property<string>("JobTypeId")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("JobType");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("LocationId")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
@@ -194,6 +244,112 @@ namespace JobStation.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobOffer");
+                });
+
+            modelBuilder.Entity("JobStation.Core.Domain.JobSeekerProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Branch")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Branch");
+
+                    b.Property<string>("CompanyName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("CompanyName");
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("CreatedOn");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("FirstName");
+
+                    b.Property<string>("HighestQualification")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("HighestQualification");
+
+                    b.Property<string>("InstituteName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("InstituteName");
+
+                    b.Property<bool>("IsExperienced")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsExperienced");
+
+                    b.Property<DateTimeOffset>("LastDate")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("StartDate");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("LastName");
+
+                    b.Property<string>("Location")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Location");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Mobile");
+
+                    b.Property<int>("Percentage")
+                        .HasMaxLength(50)
+                        .HasColumnType("int")
+                        .HasColumnName("Percentage");
+
+                    b.Property<DateTimeOffset>("StartDate")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("StartDate");
+
+                    b.Property<bool>("StillWorking")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("StillWorking");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Title");
+
+                    b.Property<int>("Year")
+                        .HasMaxLength(50)
+                        .HasColumnType("int")
+                        .HasColumnName("Year");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobSeekerProfile");
                 });
 
             modelBuilder.Entity("JobStation.Core.Domain.JobType", b =>
@@ -232,6 +388,116 @@ namespace JobStation.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("JobType");
+                });
+
+            modelBuilder.Entity("JobStation.Core.Domain.OrganisationDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("CreatedOn")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Domain")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("Domain");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("EstablishedYear")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("EstablishedYear");
+
+                    b.Property<string>("OrganisationName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("OrganisationName");
+
+                    b.Property<string>("Url")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OrganisationDetails");
+                });
+
+            modelBuilder.Entity("JobStation.Core.Domain.SeekerSkillList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("CreatedOn")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<int>("SeekerId")
+                        .HasColumnType("int")
+                        .HasColumnName("SeekerId");
+
+                    b.Property<string>("SeekerSkills")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("SeekerSkills");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SeekerSkillList");
+                });
+
+            modelBuilder.Entity("JobStation.Core.Domain.SkillList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTimeOffset>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("CreatedOn")
+                        .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("Name");
+
+                    b.Property<string>("UniqueGuid")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("UniqueGuid")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SkillList");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

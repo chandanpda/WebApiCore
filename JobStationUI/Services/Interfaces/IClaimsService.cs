@@ -15,7 +15,9 @@ namespace JobStationUI.Services.Interfaces
         string GetUserId();
         string GetUserName();
         string GetEmail();
-     
+        string GetTimeZone(string timeZoneId = "");
+
+
         List<Claim> GetRoles();
     }
 }

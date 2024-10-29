@@ -4,6 +4,87 @@
     "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStationUI\\JobStationUI.csproj": {}
   },
   "projects": {
+    "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Core\\JobStation.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Core\\JobStation.Core.csproj",
+        "projectName": "JobStation.Core",
+        "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Core\\JobStation.Core.csproj",
+        "packagesPath": "C:\\Users\\chandan kumar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chandan kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Dto\\JobStation.Dto.csproj": {
+                "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Dto\\JobStation.Dto.csproj"
+              },
+              "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Parameters\\JobStation.Parameters.csproj": {
+                "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Parameters\\JobStation.Parameters.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Dto\\JobStation.Dto.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -36,6 +117,64 @@
                 "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Parameters\\JobStation.Parameters.csproj"
               }
             }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Extension\\JobStation.Extension.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Extension\\JobStation.Extension.csproj",
+        "projectName": "JobStation.Extension",
+        "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Extension\\JobStation.Extension.csproj",
+        "packagesPath": "C:\\Users\\chandan kumar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Extension\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\chandan kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -268,8 +407,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Core\\JobStation.Core.csproj": {
+                "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Core\\JobStation.Core.csproj"
+              },
               "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Dto\\JobStation.Dto.csproj": {
                 "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Dto\\JobStation.Dto.csproj"
+              },
+              "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Extension\\JobStation.Extension.csproj": {
+                "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Extension\\JobStation.Extension.csproj"
               },
               "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Model\\JobStation.Model.csproj": {
                 "projectPath": "C:\\Users\\chandan kumar\\source\\repos\\JobStation_V1\\JobStation.Model\\JobStation.Model.csproj"
@@ -302,7 +447,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[9.0.0-rc.2.24474.1, )"
             },
             "RestSharp": {
               "target": "Package",
@@ -310,7 +455,7 @@
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[5.6.0, )"
             }
           },
           "imports": [

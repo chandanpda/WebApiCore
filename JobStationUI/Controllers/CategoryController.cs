@@ -72,15 +72,14 @@ namespace JobStationUI.Controllers
             }
 
             IRestResponse<Response<JobCategoryDto>> jobCategoryResponse;
-
             var jobCategoryDetails = await unitOfWork.CategoryService.GetByGuid(model.UniqueGuid);
 
-            if (jobCategoryDetails == null || jobCategoryDetails.Data.Data == null)
-            {
+            if (jobCategoryDetails != null || jobCategoryDetails.Data.Data != null)
                 jobCategoryResponse = await unitOfWork.CategoryService.Add(model);
-            }                
             else
-                jobCategoryResponse = await unitOfWork.CategoryService.Update(model.Id, model);
+                        jobCategoryResponse = await unitOfWork.CategoryService.Update(model.Id, model);
+           
+
 
 
             if (jobCategoryResponse != null && (jobCategoryResponse.StatusCode == HttpStatusCode.Created || jobCategoryResponse.StatusCode == HttpStatusCode.OK) && jobCategoryResponse.Data.Data != null)

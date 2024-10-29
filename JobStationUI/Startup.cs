@@ -1,5 +1,6 @@
 using AutoMapper;
 using JobStationUI;
+using JobStationUI.UIExtensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -65,6 +66,8 @@ namespace JobStation
             app.UseAuthentication();
             app.UseAuthorization();
 
+            if (!env.IsDevelopment())
+                app.ConfigureCustomExceptionMiddleware();
             app.UseEndpoints(endpoints => RouteConfig.Use(endpoints));
         }
     }

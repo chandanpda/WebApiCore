@@ -1,4 +1,5 @@
-﻿using JobStation.Core;
+﻿
+using JobStation.Core;
 using JobStation.Core.IRepository;
 using JobStation.Core.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,9 @@ namespace JobStation.API
             services.AddTransient<IJobCategoryRepository, JobCategoryRepository>();
             services.AddTransient<ILogInHistoryRepository, LogInHistoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IunitOfWork, unitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IErrorLogHistoryRepository, ErrorLogHistoryRepository>();
+            services.AddTransient<IJobTypeRepository, JobTypeRepository>();
 
             return services;
         }

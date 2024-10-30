@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace JobStationUI.Services
 {
     public class UnitOfWork : IUnitOfWork
-    {
-        
+    {       
 
         public IActiveMenuService ActiveMenuService { get; }
         public ICategoryService CategoryService { get; }
@@ -18,6 +17,7 @@ namespace JobStationUI.Services
         public ILogInHistoryService LogInHistoryService { get; }
         public IJobTypeService JobTypeService { get; }
 
+        public IJobLocationService JobLocationService { get; }
 
 
         public UnitOfWork( IActiveMenuService activeMenuService,
@@ -26,7 +26,8 @@ namespace JobStationUI.Services
             IHttpService httpService,
             IAccountService accountService,
             ILogInHistoryService logInHistoryService,
-            IJobTypeService jobTypeService)
+            IJobTypeService jobTypeService,
+            IJobLocationService jobLocationService)
         {
             ActiveMenuService = activeMenuService;
             CategoryService = categoryService;
@@ -34,6 +35,7 @@ namespace JobStationUI.Services
             AccountService = accountService;
             LogInHistoryService = logInHistoryService;
             JobTypeService = jobTypeService;
+            JobLocationService = jobLocationService;
         }
              
     }

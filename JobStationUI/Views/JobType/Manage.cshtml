@@ -23,7 +23,7 @@
                     </div>
                     <div class="heading_right">
                         <a class="btn-main" asp-area="" asp-controller="JobType" asp-action="Index" asp-route-projectGuid="@ViewBag.ProjectGuid">
-                            <i class="fa fa-arrow-circle-left"></i> Back to Author List
+                            <i class="fa fa-arrow-circle-left"></i> Back to Type List
                         </a>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-8">
                     <div class="website_settings">
-                        <form asp-controller="JobType" asp-action="Manage" method="post" id="BlogAuthorForm" enctype="multipart/form-data">
+                        <form asp-controller="JobType" asp-action="Manage" method="post" id="JobTypeForm" enctype="multipart/form-data">
                             <div asp-validation-summary="ModelOnly"></div>
                             <input type="hidden" asp-for="Id" />
                             <input type="hidden" asp-for="UniqueGuid" />

@@ -20,6 +20,7 @@ namespace JobStation.API
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IErrorLogHistoryRepository, ErrorLogHistoryRepository>();
             services.AddTransient<IJobTypeRepository, JobTypeRepository>();
+            services.AddTransient<IJobLocationRepository, JobLocationRepository>();
 
             return services;
         }

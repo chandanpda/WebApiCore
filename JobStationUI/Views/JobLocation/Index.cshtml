@@ -1,0 +1,92 @@
+﻿@inject IUnitOfWork unitOfWork
+@model List<JobLocationDto>
+
+@{
+    ViewData["Title"] = "Job Locations";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="dashboard_main">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        <h2>Job Locations</h2>
+                    </div>
+                    <div class="heading_right">
+                        <a asp-area="" asp-controller="JobLocation" asp-action="Manage" class="btn-main add-page">
+                            <i class="fal fa-plus-circle"></i> Add New Job Type
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_main_body">
+        <div class="container-fluid">
+            <div class="row">
+                <partial name="~/Views/Shared/_ErrorMessage.cshtml" />
+                <div class="col-md-12">
+                    <div class="table_main">
+                        <table class="table table_style table-hover" id="job-location-table">
+                            <thead class="cf">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    @*<th>Slug</th>
+                                        <th class="text-center">Profile picture</th>*@
+                                    <th>Added</th>
+                                    <th class="no-sort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null && Model.Count > 0)
+                                {
+
+                                    foreach (var jobLocation in Model)
+                                    {
+                                        <tr>
+                                            <td>@jobLocation.Id</td>
+                                            <td>@jobLocation.City</td>
+                                            <td>@jobLocation.State</td>
+
+                                            @*<td>
+                                                    <a href="/blog/searchauthor/@blogAuthor.Id" target="_blank">@blogAuthor.Slug</a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="@blogAuthor.ProfilePicture" target="_blank">
+                                                        <img src="@blogAuthor.ProfilePicture" class="img-responsive" style="max-height: 60px !important;" />
+                                                    </a>
+                                                </td>*@
+                                            <td data-sort='@jobLocation.AddedOn.ToString("yyyyMMdd")'>@jobLocation.AddedOn.ConvertToUserTime(unitOfWork.ClaimsService.GetTimeZone()).ToString("dd MMM, yyyy  |  hh:mm tt")</td>
+                                            <td>
+                                                <a class="btn icon_btn" asp-area="" asp-controller="JobLocation" asp-action="Manage" asp-route-guid="@jobLocation.UniqueGuid"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                    <i class="fal fa-edit"></i>
+                                                </a>
+                                                @*@if (User.IsInRole("Admin"))*@
+                                                {
+                                                    <a class="btn btn-sm btn-danger delete-job-location" href="#" data-href="/JobLocation/Delete/@jobLocation.Id"
+                                                       data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                                       data-bs-original-title="Delete" aria-label="Delete">
+                                                        <i class="fal fa-trash"></i>
+                                                    </a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

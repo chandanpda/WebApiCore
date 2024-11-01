@@ -90,3 +90,58 @@
         </div>
     </div>
 </div>
+@section scripts
+{
+<script>
+    $(document).on('click', '.delete-job-location', function (e) {
+        e.preventDefault();
+        var _self = $(this);
+        bootbox.confirm({
+            title: "Confirm?",
+            message: "Are you sure for this action?",
+            centerVertical: false,
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel',
+                    className: 'btn-danger'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm',
+                    className: 'btn-success'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: _self.attr('data-href'),
+                        success: function (data) {
+                            if (data.success) {
+
+                                toastr.success(data.msg);
+
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 2000);
+
+                            } else {
+                                $('.ajax-loader').addClass('d-none');
+                                toastr.error(data.msg);
+                            }
+
+                        },
+                        error: function (req, error) {
+                            toastr.error(req.responseText);
+                            $('.ajax-loader').addClass('d-none');
+                        },
+                        beforeSend: function (data) {
+                            $('.ajax-loader').removeClass('d-none');
+                        }
+                    });
+
+                }
+            }
+        });
+    });
+</script>
+}

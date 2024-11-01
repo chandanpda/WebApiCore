@@ -190,8 +190,11 @@ C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\Category\Manage.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\JobLocation\Index.cshtml.g.cs
+C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\JobLocation\Manage.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\JobType\Index.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\JobType\Manage.cshtml.g.cs
+C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\OrganisationDetails\Index.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\Shared\_AdminLeftMenu.cshtml.g.cs
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\Shared\_AjaxLoader.cshtml.g.cs
@@ -210,6 +213,3 @@ C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\ref\JobStationUI.dll
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\JobStationUI.pdb
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\JobStationUI.genruntimeconfig.cache
-C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\JobLocation\Index.cshtml.g.cs
-C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\JobLocation\Manage.cshtml.g.cs
-C:\Users\chandan kumar\source\repos\JobStation_V1\JobStationUI\obj\Debug\net5.0\Razor\Views\OrganisationDetails\Index.cshtml.g.cs

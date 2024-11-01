@@ -21,6 +21,7 @@ namespace JobStationUI
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IJobTypeService, JobTypeService>();
             services.AddScoped<IJobLocationService, JobLocationService>();
+            services.AddScoped<IOrganisationDetailService, OrganisationDetailService>();
             return services;
         }
     }

@@ -91,5 +91,42 @@ namespace JobStationUI.Controllers
             ModelState.AddModelError("", "Some error occured");
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var jobLocation = await unitOfWork.JobLocationService.GetById(id);
+            if (jobLocation == null || jobLocation.StatusCode != HttpStatusCode.OK || jobLocation.Data.Data == null)
+                return Json(new { success = false, msg = "Invalid JobLocation" });
+
+            var jobLocationResponse = await unitOfWork.JobLocationService.Delete(id);
+
+            if (jobLocationResponse != null && jobLocationResponse.StatusCode == HttpStatusCode.NoContent)
+                return Json(new { success = true, msg = "Job Location deleted successfully" });
+
+            if (jobLocationResponse != null && jobLocationResponse.Data != null)
+            {
+                if (jobLocationResponse.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var errorMessage = jobLocationResponse.Data.ErrorCode;
+                    if (jobLocationResponse.Data.Errors != null)
+                    {
+                        errorMessage = "";
+                        foreach (var error in jobLocationResponse.Data.Errors)
+                        {
+                            errorMessage = string.IsNullOrWhiteSpace(errorMessage) ? error : $"<br/>{error}";
+                        }
+                    }
+
+                    return Json(new { success = false, msg = errorMessage });
+                }
+
+                return Json(new { success = false, msg = jobLocationResponse.Data.ErrorCode });
+            }
+
+            return Json(new { success = false, msg = "Some error occured" });
+        }
+
+
     }
 }

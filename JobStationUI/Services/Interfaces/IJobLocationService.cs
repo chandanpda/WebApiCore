@@ -13,6 +13,7 @@ namespace JobStationUI.Services.Interfaces
     {
         Task<IRestResponse<Response<List<JobLocationDto>>>> Get();
         Task<IRestResponse<Response<JobLocationDto>>> GetByGuid(string guid);
+        Task<IRestResponse<Response<JobLocationDto>>> GetById(int Id);
         Task<IRestResponse<Response<JobLocationDto>>> Add(JobLocationModel model);
         Task<IRestResponse<Response<JobLocationDto>>> Update(int id, JobLocationModel model);
         Task<IRestResponse<Response<JobLocationDto>>> Delete(int id);

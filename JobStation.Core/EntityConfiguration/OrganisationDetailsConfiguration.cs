@@ -22,6 +22,13 @@ namespace JobStation.Core.EntityConfiguration
                .HasColumnType("int")
                .UseIdentityColumn(1, 1);
 
+            builder.Property(x => x.UniqueGuid)
+              .HasColumnName("UniqueGuid")
+              .HasColumnType("nvarchar")
+              .HasMaxLength(50)
+              .HasDefaultValueSql("NEWID()")
+              .IsRequired();
+
             builder.Property(x => x.OrganisationName)
               .HasColumnName("OrganisationName")
               .HasColumnType("nvarchar")
@@ -56,6 +63,13 @@ namespace JobStation.Core.EntityConfiguration
                     .HasColumnType("datetimeoffset(7)")
                     .HasDefaultValueSql("getdate()")
                     .IsRequired();
+            builder.Property(x => x.UpdatedOn)
+        .HasColumnName("UpdatedOn")
+        .HasColumnType("datetimeoffset(7)")
+        .HasDefaultValueSql("getdate()")
+        .IsRequired();
+
+
         }
     }
 }

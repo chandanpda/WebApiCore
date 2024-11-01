@@ -1,0 +1,87 @@
+﻿@inject IUnitOfWork unitOfWork
+@model List<OrganisationDetailsDto>
+
+@{
+    ViewData["Title"] = "Organisations";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="dashboard_main">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        <h2>Organisations</h2>
+                    </div>
+                    <div class="heading_right">
+                        <a asp-area="" asp-controller="OrganisationDetails" asp-action="Manage" class="btn-main add-page">
+                            <i class="fal fa-plus-circle"></i> Add New Organisation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_main_body">
+        <div class="container-fluid">
+            <div class="row">
+                <partial name="~/Views/Shared/_ErrorMessage.cshtml" />
+                <div class="col-md-12">
+                    <div class="table_main">
+                        <table class="table table_style table-hover" id="organisation-table">
+                            <thead class="cf">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>OrganisationName</th>
+                                    <th>Domain</th>
+                                    <th>EstablishedYear</th>
+                                    <th>Website</th>
+                                    <th>Email</th>                                   
+                                    <th>Added On</th>
+                                    <th class="no-sort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null && Model.Count > 0)
+                                {
+
+                                    foreach (var organisation in Model)
+                                    {
+                                <tr>
+
+                                    <td>@organisation.Id</td>
+                                    <td>@organisation.OrganisationName</td>
+                                    <td>@organisation.Domain</td>
+                                    <td>@organisation.EstablishedYear</td>
+                                    <td>@organisation.Url</td>
+                                    <td>@organisation.Email</td>
+                                
+                                    <td data-sort='@organisation.CreatedOn.ToString("yyyyMMdd")'>@organisation.CreatedOn.ConvertToUserTime(unitOfWork.ClaimsService.GetTimeZone()).ToString("dd MMM, yyyy  |  hh:mm tt")</td>
+                                    <td>
+                                        <a class="btn icon_btn" asp-area="" asp-controller="OrganisationDetails" asp-action="Manage" asp-route-guid="@organisation.UniqueGuid"
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <i class="fal fa-edit"></i>
+                                        </a>
+                                      
+                                        <a class="btn btn-sm btn-danger delete-job-location" href="#" data-href="/OrganisationDetails/Delete/@organisation.Id"
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                           data-bs-original-title="Delete" aria-label="Delete">
+                                            <i class="fal fa-trash"></i>
+                                        </a>
+                                       
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   

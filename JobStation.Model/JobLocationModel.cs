@@ -11,8 +11,10 @@ namespace JobStation.Model
     {
         public int Id { get; set; }
         public string UniqueGuid { get; set; }
+
         [Required(ErrorMessage = "City is Required")]
         public string City { get; set; }
+
         [Required(ErrorMessage = "State is Required")]
         public string State { get; set; }
         public DateTimeOffset AddedOn { get; set; }

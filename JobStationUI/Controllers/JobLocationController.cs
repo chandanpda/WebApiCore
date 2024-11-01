@@ -58,12 +58,10 @@ namespace JobStationUI.Controllers
 
             IRestResponse<Response<JobLocationDto>> jobLocationResponse;
             var jobLocationDetails = await unitOfWork.JobLocationService.GetByGuid(model.UniqueGuid);
-
-            if (jobLocationDetails != null || jobLocationDetails.Data.Data != null)
-                jobLocationResponse = await unitOfWork.JobLocationService.Add(model);
-            else
+            if (jobLocationDetails != null && jobLocationDetails.StatusCode == HttpStatusCode.OK && jobLocationDetails.Data.Data != null)
                 jobLocationResponse = await unitOfWork.JobLocationService.Update(model.Id, model);
-
+            else
+                jobLocationResponse = await unitOfWork.JobLocationService.Add(model);
 
 
             if (jobLocationResponse != null && (jobLocationResponse.StatusCode == HttpStatusCode.Created || jobLocationResponse.StatusCode == HttpStatusCode.OK) && jobLocationResponse.Data.Data != null)
@@ -71,7 +69,7 @@ namespace JobStationUI.Controllers
                 TempData["type"] = "success";
                 TempData["message"] = "Record saved successfully";
 
-                return RedirectToAction("Index", "JobType");
+                return RedirectToAction("Index", "JobLocation");
             }
 
             if (jobLocationResponse != null && jobLocationResponse.StatusCode == HttpStatusCode.BadRequest)

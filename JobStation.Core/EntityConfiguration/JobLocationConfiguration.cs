@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace JobStation.Core.EntityConfiguration
 {
-    public class JobLocationConfiguration :IEntityTypeConfiguration<JobLocation>
+    public class JobLocationConfiguration : IEntityTypeConfiguration<JobLocation>
     {
         public void Configure(EntityTypeBuilder<JobLocation> builder)
         {

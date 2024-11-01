@@ -10,6 +10,8 @@ namespace JobStation.Model
     public class OrganisationDetailsModel
     {
         public int Id { get; set; }
+        public string UniqueGuid { get; set; }
+
         [Required(ErrorMessage = "Organisation name is Required")]
         [Display(Name ="Organisation")]
         public string OrganisationName { get; set; }
@@ -21,5 +23,7 @@ namespace JobStation.Model
         public string Email { get; set; }
         public string Url { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
+        public DateTimeOffset UpdatedOn { get; set; }
+        
     }
 }

@@ -63,12 +63,10 @@ namespace JobStationUI.Controllers
 
             IRestResponse<Response<JobTypeDto>> jobTypeResponse;
             var jobTypeDetails = await unitOfWork.JobTypeService.GetByGuid(model.UniqueGuid);
-
-            if (jobTypeDetails != null || jobTypeDetails.Data.Data != null)
-                jobTypeResponse = await unitOfWork.JobTypeService.Add(model);
-            else
+            if (jobTypeDetails != null && jobTypeDetails.StatusCode == HttpStatusCode.OK && jobTypeDetails.Data.Data != null)
                 jobTypeResponse = await unitOfWork.JobTypeService.Update(model.Id, model);
-
+            else
+                jobTypeResponse = await unitOfWork.JobTypeService.Add(model);
 
 
             if (jobTypeResponse != null && (jobTypeResponse.StatusCode == HttpStatusCode.Created || jobTypeResponse.StatusCode == HttpStatusCode.OK) && jobTypeResponse.Data.Data != null)

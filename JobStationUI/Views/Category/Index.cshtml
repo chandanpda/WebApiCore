@@ -34,7 +34,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="db-worklog-filter db-task-box">
 
-                        <form method="get" asp-area="" asp-controller="JobCategory" asp-action="Index">
+                        <form method="get" asp-area="" asp-controller="Category" asp-action="Index">
                             <input type="hidden" name="sortBy" value="@Model.Params.SortBy" />
                             <div class="parameter-section">
                                 <div class="row">
@@ -101,7 +101,7 @@
                                     <th>Id </th>
                                     <th>Name </th>
                                      <th>Last Update</th>
-                                    @*<th>Action</th>*@
+                                    <th>Action</th>
                                 </tr>
                             </thead>
 
@@ -118,23 +118,24 @@
                                             <td data-sort='@jobCategory.UpdatedOn.ToString("yyyyMMdd")'>@jobCategory.UpdatedOn.ToString("dd MMM, yyyy  |  hh:mm tt")</td>
                                            
 
-                                            @*<td>
+                                            <td>
 
-                                                <a class="btn icon_btn" asp-area="" asp-controller="jobCategory" asp-action="Manage" asp-route-guid="@jobCategory.UniqueGuid"
+                                                <a class="btn icon_btn" asp-area="" asp-controller="Category" asp-action="Manage" asp-route-guid="@jobCategory.UniqueGuid"
                                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                                     <i class="fal fa-edit"></i>
                                                 </a>
 
-                                                @if (User.IsInRole("SuperAdmin"))
-                                                {
-                                                    <a class="btn btn-sm btn-danger delete-blog-category" href="#" data-href="/jobCategory/Delete/@jobCategory.Id"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top" title=""
-                                                       data-bs-original-title="Delete" aria-label="Delete">
-                                                        <i class="fal fa-trash"></i>
-                                                    </a>
-                                                }
-                                            </td>*@
-                                        </tr>
+                                            </td>
+                                                @*@if (User.IsInRole("SuperAdmin"))
+            {
+                <a class="btn btn-sm btn-danger delete-blog-category" href="#" data-href="/jobCategory/Delete/@jobCategory.Id"
+                   data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                   data-bs-original-title="Delete" aria-label="Delete">
+                    <i class="fal fa-trash"></i>
+                </a>
+            }
+        </td>*@
+</tr>
                                     }
 
                                 }

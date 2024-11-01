@@ -9,4 +9,3 @@ C:\Users\chandan kumar\source\repos\JobStation_V1\JobStation.Extension\obj\Debug
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStation.Extension\obj\Debug\net5.0\JobStation.Extension.dll
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStation.Extension\obj\Debug\net5.0\ref\JobStation.Extension.dll
 C:\Users\chandan kumar\source\repos\JobStation_V1\JobStation.Extension\obj\Debug\net5.0\JobStation.Extension.pdb
-C:\Users\chandan kumar\source\repos\JobStation_V1\JobStation.Extension\obj\Debug\net5.0\JobStation.Extension.csproj.AssemblyReference.cache

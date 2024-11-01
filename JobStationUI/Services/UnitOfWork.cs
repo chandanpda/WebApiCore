@@ -18,6 +18,7 @@ namespace JobStationUI.Services
         public IJobTypeService JobTypeService { get; }
 
         public IJobLocationService JobLocationService { get; }
+        public IOrganisationDetailService OrganisationDetailService { get; }
 
 
         public UnitOfWork( IActiveMenuService activeMenuService,
@@ -27,7 +28,8 @@ namespace JobStationUI.Services
             IAccountService accountService,
             ILogInHistoryService logInHistoryService,
             IJobTypeService jobTypeService,
-            IJobLocationService jobLocationService)
+            IJobLocationService jobLocationService,
+            IOrganisationDetailService organisationDetailService)
         {
             ActiveMenuService = activeMenuService;
             CategoryService = categoryService;
@@ -36,6 +38,7 @@ namespace JobStationUI.Services
             LogInHistoryService = logInHistoryService;
             JobTypeService = jobTypeService;
             JobLocationService = jobLocationService;
+            OrganisationDetailService = organisationDetailService;
         }
              
     }

@@ -42,6 +42,13 @@ namespace JobStationUI.Services
             return response;
         }
 
+        public async Task<IRestResponse<Response<JobCategoryDto>>> GetById(int Id)
+        {
+            var (restClient, restRequest) = httpService.Call($"Category/GetById/{Id}", Method.GET);
+            var response = await restClient.ExecuteAsync<Response<JobCategoryDto>>(restRequest);
+            return response;
+        }
+
         public async Task<IRestResponse<Response<JobCategoryDto>>> GetByGuid(string UniqueGuid)
         {
             var (restClient, restRequest) = httpService.Call($"Category/GetByGuid/{UniqueGuid}", Method.GET);

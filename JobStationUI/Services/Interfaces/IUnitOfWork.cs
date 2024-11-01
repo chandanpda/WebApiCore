@@ -15,5 +15,6 @@ namespace JobStationUI.Services.Interfaces
         ILogInHistoryService LogInHistoryService { get; }
         IJobTypeService JobTypeService { get; }
         IJobLocationService JobLocationService { get; }
+        IOrganisationDetailService OrganisationDetailService { get; }
     }
 }

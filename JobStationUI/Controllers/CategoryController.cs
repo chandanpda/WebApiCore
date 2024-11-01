@@ -4,6 +4,7 @@ using JobStation.Model;
 using JobStation.Parameters;
 using JobStation.Utility;
 using JobStationUI.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
@@ -72,12 +73,12 @@ namespace JobStationUI.Controllers
             }
 
             IRestResponse<Response<JobCategoryDto>> jobCategoryResponse;
-            var jobCategoryDetails = await unitOfWork.CategoryService.GetByGuid(model.UniqueGuid);
 
-            if (jobCategoryDetails != null || jobCategoryDetails.Data.Data != null)
-                jobCategoryResponse = await unitOfWork.CategoryService.Add(model);
+            var jobCategoryDetails = await unitOfWork.CategoryService.GetByGuid(model.UniqueGuid);
+            if (jobCategoryDetails != null && jobCategoryDetails.StatusCode == HttpStatusCode.OK && jobCategoryDetails.Data.Data != null)
+               jobCategoryResponse = await unitOfWork.CategoryService.Update(model.Id, model);
             else
-                        jobCategoryResponse = await unitOfWork.CategoryService.Update(model.Id, model);
+                jobCategoryResponse = await unitOfWork.CategoryService.Add(model); 
            
 
 

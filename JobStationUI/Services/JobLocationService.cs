@@ -3,9 +3,7 @@ using JobStation.Model;
 using JobStation.Utility;
 using JobStationUI.Services.Interfaces;
 using RestSharp;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace JobStationUI.Services
@@ -27,14 +25,14 @@ namespace JobStationUI.Services
 
         public async Task<IRestResponse<Response<JobLocationDto>>> GetByGuid(string UniqueGuid)
         {
-            var (restClient, restRequest) = httpService.Call($"JobType/GetByGuid/{UniqueGuid}", Method.GET);
+            var (restClient, restRequest) = httpService.Call($"JobLocation/GetByGuid/{UniqueGuid}", Method.GET);
             var response = await restClient.ExecuteAsync<Response<JobLocationDto>>(restRequest);
             return response;
         }
 
         public async Task<IRestResponse<Response<JobLocationDto>>> Add(JobLocationModel model)
         {
-            var (restClient, restRequest) = httpService.Call("JobType", Method.POST);
+            var (restClient, restRequest) = httpService.Call("JobLocation", Method.POST);
             restRequest.AddJsonBody(model);
             var response = await restClient.ExecuteAsync<Response<JobLocationDto>>(restRequest);
             return response;
@@ -42,7 +40,7 @@ namespace JobStationUI.Services
 
         public async Task<IRestResponse<Response<JobLocationDto>>> Update(int id, JobLocationModel model)
         {
-            var (restClient, restRequest) = httpService.Call($"JobType/{id}", Method.PUT);
+            var (restClient, restRequest) = httpService.Call($"JobLocation/{id}", Method.PUT);
             restRequest.AddJsonBody(model);
             var response = await restClient.ExecuteAsync<Response<JobLocationDto>>(restRequest);
             return response;
@@ -50,7 +48,7 @@ namespace JobStationUI.Services
 
         public async Task<IRestResponse<Response<JobLocationDto>>> Delete(int id)
         {
-            var (restClient, restRequest) = httpService.Call($"JobType/{id}", Method.DELETE);
+            var (restClient, restRequest) = httpService.Call($"JobLocation/{id}", Method.DELETE);
             var response = await restClient.ExecuteAsync<Response<JobLocationDto>>(restRequest);
             return response;
         }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace JobStation.API.Controllers
 {
     [ApiController]
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class JobLocationController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
@@ -35,9 +35,9 @@ namespace JobStation.API.Controllers
         }
 
         [HttpGet("GetByGuid/{UniqueGuid}")]
-        public async Task<IActionResult> GetByGuid(string Guid)
+        public async Task<IActionResult> GetByGuid(string UniqueGuid)
         {
-            var jobLocation = await unitOfWork.JobLocationRepository.FirstOrDefaultAsync(e => e.UniqueGuid == Guid);
+            var jobLocation = await unitOfWork.JobLocationRepository.FirstOrDefaultAsync(e => e.UniqueGuid == UniqueGuid);
             var jobLocationResponse = mapper.Map<JobLocationDto>(jobLocation);
             return StatusCode(StatusCodes.Status200OK, new Response<JobLocationDto>(jobLocationResponse));
         }

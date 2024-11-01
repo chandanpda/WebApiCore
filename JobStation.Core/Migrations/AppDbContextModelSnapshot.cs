@@ -426,6 +426,20 @@ namespace JobStation.Core.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("OrganisationName");
 
+                    b.Property<string>("UniqueGuid")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("UniqueGuid")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTimeOffset>("UpdatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetimeoffset(7)")
+                        .HasColumnName("UpdatedOn")
+                        .HasDefaultValueSql("getdate()");
+
                     b.Property<string>("Url")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")

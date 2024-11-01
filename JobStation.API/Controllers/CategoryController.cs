@@ -47,6 +47,14 @@ namespace JobStation.API.Controllers
             return StatusCode(StatusCodes.Status200OK, new Response<JobCategoryListingResponseDto>(categories));
         }
 
+        [HttpGet("GetById/{Id}")]
+        public async Task<IActionResult> GetById(int Id)
+        {
+            var category = await unitOfWork.JobCategory.FirstOrDefaultAsync(e => e.Id == Id);
+            var categoryResponse = mapper.Map<JobCategoryDto>(category);
+            return StatusCode(StatusCodes.Status200OK, new Response<JobCategoryDto>(categoryResponse));
+        }
+
         [HttpGet("GetByGuid/{UniqueGuid}")]
         public async Task<IActionResult> GetByGuid(string UniqueGuid)
         {

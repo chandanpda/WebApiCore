@@ -17,6 +17,7 @@ namespace JobStationUI.Services.Interfaces
         Task<IRestResponse<Response<JobCategoryListingResponseDto>>> GetAll(JobCategoryListParams p);
 
         Task<IRestResponse<Response<JobCategoryDto>>> GetByGuid(string UniqueGuid);
+        Task<IRestResponse<Response<JobCategoryDto>>> GetById(int Id);
         //Task<IRestResponse<Response<BlogCategoryDto>>> GetByUrl(string categoryUrl);
         Task<IRestResponse<Response<JobCategoryDto>>> Add(JobCategoryModel model);
         Task<IRestResponse<Response<JobCategoryDto>>> Update(int id, JobCategoryModel model);

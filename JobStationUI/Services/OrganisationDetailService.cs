@@ -18,7 +18,7 @@ namespace JobStationUI.Services
             this.httpService = httpService;
         }
         
-        public async Task<IRestResponse<Response<List<OrganisationDetailsDto>>>> Get(string q)
+        public async Task<IRestResponse<Response<List<OrganisationDetailsDto>>>> Get(string q = "")
         {
             var(restClient, restRequest) = httpService.Call("OrganisationDetails", Method.GET);
             restRequest.AddQueryParameter("q", q);
@@ -26,6 +26,12 @@ namespace JobStationUI.Services
             return response;
         }
 
+        public async Task<IRestResponse<Response<OrganisationDetailsDto>>> GetById(int id)
+        {
+            var (restClient, restRequest) = httpService.Call($"OrganisationDetails/GetById/{id}", Method.GET);
+            var response = await restClient.ExecuteAsync<Response<OrganisationDetailsDto>>(restRequest);
+            return response;
+        }
         public async Task<IRestResponse<Response<OrganisationDetailsDto>>> GetByGuid(string UniqueGuid)
         {
             var (restClient, restRequest) = httpService.Call($"OrganisationDetails/GetByGuid/{UniqueGuid}", Method.GET);

@@ -17,8 +17,8 @@ namespace JobStation.Core.Domain
         public string Title { get; set; }       
         public string Description { get; set; }
         public int Experience { get; set; }
-        public string Salary { get; set; }
-        public bool IsActive { get; set; }
+        public float Salary { get; set; }
+        public bool? IsActive { get; set; }
         public DateTimeOffset CreatedOn { get; set; }
         public DateTimeOffset UpdatedOn { get; set; }
     }

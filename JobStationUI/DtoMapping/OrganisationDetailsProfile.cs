@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JobStation.Core.Domain;
+using JobStation.Dto;
 using JobStation.Model;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace JobStationUI.DtoMapping
     {
         public OrganisationDetailsProfile()
         {
-            CreateMap<OrganisationDetails, OrganisationDetailsModel>().ReverseMap();
+            CreateMap<OrganisationDetailsDto, OrganisationDetailsModel>().ReverseMap();
         }
     }
 }

@@ -2,13 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\JobStation.API",
-    "\\JobStation.API\\Controllers",
-    "\\JobStation.Core",
-    "\\JobStation.Core\\Domain",
+    "\\JobStation.Dto",
     "\\JobStationUI",
     "\\JobStationUI\\Controllers",
-    "\\JobStationUI\\Services"
+    "\\JobStationUI\\Services",
+    "\\JobStationUI\\Views",
+    "\\JobStationUI\\Views\\JobLocation",
+    "\\JobStationUI\\Views\\OrganisationDetails"
   ],
-  "SelectedNode": "\\JobStationUI\\Services\\JobLocationService.cs",
+  "SelectedNode": "\\JobStationUI\\Views\\OrganisationDetails\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

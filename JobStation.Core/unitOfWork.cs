@@ -16,6 +16,8 @@ namespace JobStation.Core
         public IErrorLogHistoryRepository ErrorLogHistory { get; }
         public IJobTypeRepository JobTypeRepository { get; }
         public IJobLocationRepository JobLocationRepository { get; }
+        public IOrganisationRepository OrganisationRepository { get; }
+        public IJobOfferRepository JobOfferRepository { get; }
 
         public UnitOfWork(AppDbContext context,
             IJobCategoryRepository jobCategory,
@@ -23,7 +25,9 @@ namespace JobStation.Core
             ILogInHistoryRepository logInHistoryRepository,
             IErrorLogHistoryRepository errorLogHistoryRepository,
             IJobTypeRepository jobTypeRepository,
-            IJobLocationRepository jobLocationRepository)
+            IJobLocationRepository jobLocationRepository,
+            IOrganisationRepository organisationRepository,
+            IJobOfferRepository jobOfferRepository)
         {
             _context = context;
             JobCategory =  jobCategory;
@@ -32,6 +36,8 @@ namespace JobStation.Core
             ErrorLogHistory = errorLogHistoryRepository;
             JobTypeRepository = jobTypeRepository;
             JobLocationRepository = jobLocationRepository;
+            OrganisationRepository = organisationRepository;
+            JobOfferRepository = jobOfferRepository;
         }
         public int SaveChanges()
         {

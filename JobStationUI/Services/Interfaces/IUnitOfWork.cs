@@ -16,5 +16,6 @@ namespace JobStationUI.Services.Interfaces
         IJobTypeService JobTypeService { get; }
         IJobLocationService JobLocationService { get; }
         IOrganisationDetailService OrganisationDetailService { get; }
+        IJobOfferService JobOfferService { get; }
     }
 }

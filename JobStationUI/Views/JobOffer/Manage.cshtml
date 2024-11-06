@@ -1,0 +1,208 @@
+﻿@model JobOfferModel
+@inject IUnitOfWork unitOfWork
+@{
+    ViewBag.Title = "Job Offers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+
+
+<div class="dashboard_main">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        @if (Model.Id > 0)
+                        {
+                            <h2>Update <em>@Model.Title</em> Job Offer</h2>
+                        }
+                        else
+                        {
+                            <h2>Add New Job Offer</h2>
+                        }
+                    </div>
+                    <div class="heading_right">
+                        <a class="btn-main" asp-area="" asp-controller="JobOffer" asp-action="Index">
+                            <i class="fa fa-arrow-circle-left"></i> Back to Post List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_main_body">
+        <partial name="~/Views/Shared/_ErrorMessage.cshtml" />
+        <form asp-controller="JobOffer" asp-action="Manage" method="post" id="JobOfferForm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UniqueGuid" />
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="website_settings">
+
+
+                            <div class="row">
+                                <div class="col-md-6" style="border: solid 1px #4897d5; padding: 10px; border-right: none !important;">
+                                    <div class="row">
+
+                                        <div class="col-sm-12">
+
+                                            <fieldset>
+                                                <legend>Basic Details</legend>
+
+                                                <div class="row">
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Title*</label>
+                                                            <input type="text" asp-for="Title" class="form-control" placeholder="Title*" />
+                                                            <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Description</label>
+                                                            <textarea class="form-control" asp-for="Description"></textarea>
+                                                            <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+
+
+                                            <div class="col-md-12">
+                                                <fieldset class="scheduler-border">
+                                                    <legend>Category & JobType</legend>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>Category*</label>
+                                                                <select class="form-control form-select" asp-for="JobCategoryId" asp-items="Model.CategoryItems">
+                                                                </select>
+                                                                <span asp-validation-for="JobCategoryId" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>Job Type*</label>
+                                                                <select class="form-control form-select" asp-for="JobTypeId" asp-items="Model.JobTypeItems">
+                                                                </select>
+                                                                <span asp-validation-for="JobTypeId" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6" style="border: solid 1px #4897d5; padding: 10px; border-right: none !important;">
+                                    <div class="col-md-12">
+                                        <fieldset class="scheduler-border">
+                                            <legend class="scheduler-border">IsActive</legend>
+                                            <div class="control-group">
+                                                <label class="switch" for="IsActive">
+                                                    <input type="checkbox" asp-for="IsActive">
+                                                    <span asp-validation-for="IsActive" class="slider round text-danger"></span>
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <fieldset class="scheduler-border">
+                                            <legend>Company & Location</legend>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Company*</label>
+                                                        <select class="form-control form-select" asp-for="CompanyId" asp-items="Model.CompanyItems">
+                                                            <option value="">Select Company</option>
+                                                        </select>
+                                                        <span asp-validation-for="CompanyId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Location*</label>
+                                                        <select class="form-control form-select" asp-for="LocationId" asp-items="Model.LocationItems">
+                                                        </select>
+                                                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <fieldset class="scheduler-border">
+                                            <legend>Experience & Salary</legend>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Title*</label>
+                                                        <input type="text" asp-for="Experience" class="form-control" placeholder="Experience*" />
+                                                        <span asp-validation-for="@Model.Experience" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Title*</label>
+                                                        <input type="text" asp-for="Salary" class="form-control" placeholder="Salary*" />
+                                                        <span asp-validation-for="@Model.Salary" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sticky-button-section">
+                <div class="form-group text-center">                   
+                    <input type="submit" class="btn-main" name="Action" value="Save" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+
+    <partial name="~/Views/Shared/_TinymceScripts.cshtml" />
+    <partial name="~/Views/Shared/_GijgoDatePicker.cshtml" />
+    <partial name="~/Views/Shared/_ChosenSelect.cshtml" />
+    <script>
+        $(function () {
+            tinymceInit('#Description');
+
+
+            $('#PostDate').datepicker({
+                uiLibrary: 'bootstrap5',
+                format: 'mm/dd/yyyy'
+            });
+        });
+    </script>
+}
+

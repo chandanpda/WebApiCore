@@ -1,0 +1,251 @@
+﻿@model List<JobOfferDto>
+@inject IClaimsService claimsService
+@inject IUnitOfWork unitOfWork
+@{
+    ViewBag.Title = "Job Offers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    //var categories = (List<BlogCategoryDto>)ViewBag.Categories;
+    //var pageUrl = $"/BlogPost?count={Model.Params.RecordPerPage}&categoryId={Model.Params.CategoryId}&q={Model.Params.Q}&status={Model.Params.Status}&countrycode={Model.Params.CountryCode}&StateCode={Model.Params.StateCode}&city={Model.Params.City}";
+}
+
+<div class="dashboard_main">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        <h2>Job Offer</h2>
+                    </div>
+                    <div class="heading_right">
+                        <a asp-area="" asp-controller="JobOffer" asp-action="Manage" class="btn-main">
+                            <i class="fal fa-plus-circle"></i> Add New Job Offer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_main_body">
+        <div class="container-fluid">
+            <div class="row">
+                <partial name="~/Views/Shared/_ErrorMessage.cshtml" />
+                <div class="col-md-12">
+                    <div class="table_main">
+                        <table class="table table_style table-hover" id="organisation-table">
+                            <thead class="cf">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Experience</th>
+                                    <th>Salary</th>
+                                    <th>Added On</th>
+                                    <th>Last Updated On</th>
+                                    <th class="no-sort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (Model != null)
+                                {
+
+                                    foreach (var offer in Model)
+                                    {
+                                <tr>
+
+                                    <td>@offer.Id</td>
+                                    <td>@offer.Title</td>
+                                    <td>@offer.Experience</td>
+                                    <td>@offer.Salary</td>  
+                                    <td data-sort='@offer.CreatedOn.ToString("yyyyMMdd")'>@offer.CreatedOn.ConvertToUserTime(unitOfWork.ClaimsService.GetTimeZone()).ToString("dd MMM, yyyy  |  hh:mm tt")</td>
+                                    <td data-sort='@offer.UpdatedOn.ToString("yyyyMMdd")'>@offer.UpdatedOn.ConvertToUserTime(unitOfWork.ClaimsService.GetTimeZone()).ToString("dd MMM, yyyy  |  hh:mm tt")</td>
+                                    <td>
+                                        <a class="btn icon_btn" asp-area="" asp-controller="JobOffer" asp-action="Manage" asp-route-guid="@offer.UniqueGuid"
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <i class="fal fa-edit"></i>
+                                        </a>
+
+
+                                        <a class="btn btn-sm btn-danger delete-offer" href="#" data-href="/JobOffer/Delete/@offer.Id"
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                                           data-bs-original-title="Delete" aria-label="Delete">
+                                            <i class="fal fa-trash"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).on('click', '.delete-offer', function (e) {
+            e.preventDefault();
+            var _self = $(this);
+            bootbox.confirm({
+                title: "Confirm?",
+                message: "Are you sure for this action?",
+                centerVertical: false,
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel',
+                        className: 'btn-danger'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> Confirm',
+                        className: 'btn-success'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: _self.attr('data-href'),
+                            success: function (data) {
+                                if (data.success) {
+
+                                    toastr.success(data.msg);
+
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 2000);
+
+                                } else {
+                                    $('.ajax-loader').addClass('d-none');
+                                    toastr.error(data.msg);
+                                }
+
+                            },
+                            error: function (req, error) {
+                                toastr.error(req.responseText);
+                                $('.ajax-loader').addClass('d-none');
+                            },
+                            beforeSend: function (data) {
+                                $('.ajax-loader').removeClass('d-none');
+                            }
+                        });
+
+                    }
+                }
+            });
+        });
+    </script>
+
+}
+
+
+
+
+@*<div class="dashboard_main_body">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table_main">
+                        <table class="table table_style table-hover" id="blog-post-table">
+
+                            <thead class="cf">
+                                <tr>
+
+                                    <th>Title @Html.Raw(SortingHtml.GetSortingHtml(pageUrl, "title", Model.Params.SortBy, Model.Params.SortDirection))</th>
+                                    <th> @Html.Raw(SortingHtml.GetSortingHtml(pageUrl, "category", Model.Params.SortBy, Model.Params.SortDirection))</th>
+                                    <th>Author @Html.Raw(SortingHtml.GetSortingHtml(pageUrl, "author", Model.Params.SortBy, Model.Params.SortDirection))</th>
+                                    <th class="text-center">Sticky Post @Html.Raw(SortingHtml.GetSortingHtml(pageUrl, "stickypost", Model.Params.SortBy, Model.Params.SortDirection))</th>
+                                    <th>Post Date @Html.Raw(SortingHtml.GetSortingHtml(pageUrl, "postdate", Model.Params.SortBy, Model.Params.SortDirection))</th>
+                                    <th class="text-center">Status @Html.Raw(SortingHtml.GetSortingHtml(pageUrl, "status", Model.Params.SortBy, Model.Params.SortDirection))</th>
+                                    <th class="no-sort text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Data != null && Model.Data.Count > 0)
+                                {
+                                    foreach (var m in Model.Data)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @m.Title
+                                                <br />
+                                                <small>
+                                                    <em>
+                                                        <a href="/blog/@m.Slug" target="_blank">@m.Slug</a>
+                                                    </em>
+                                                </small>
+                                            </td>
+                                            <td>@m.</td>
+                                            <td>@m.AuthorName</td>
+                                            <td class="text-center">@m.StickyPost</td>
+                                            <td data-sort='@m.PostDate.ToString("yyyyMMdd")'>@m.PostDate.ConvertToUserTime(unitOfWork.ClaimsService.GetTimeZone()).ToString("dd MMM, yyyy  |  hh:mm tt")</td>
+                                            <td class="text-center">
+                                                @if (@m.Status.ToLower() == "published")
+                                                {
+                                                    <span class="active-status">@m.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="in-active-status">@m.Status</span>
+                                                }
+                                            </td>
+
+
+                                            <td class="text-center">
+                                                <span class="toggle_span" data-id="sub_menu_@{@m.UniqueGuid}">
+                                                    <a class="icon_btn" data-bs-toggle="tooltip" data-bs-placement="right" title="Action"><i class="fa-light fa-circle-location-arrow"></i></a>
+                                                    <div class="collapse mapping_list_collapse" id="sub_menu_@{@m.UniqueGuid}" data-id="sub_menu_@{@m.UniqueGuid}">
+                                                        <ul>
+                                                            <li>
+                                                                <a class="update-blog-post" asp-area="" asp-controller="BlogPost" asp-action="Manage" asp-route-guid="@m.UniqueGuid">
+                                                                    Edit
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a class="preview-blog-post" asp-area="" asp-controller="BlogPost" asp-action="PreviewBlogPost" asp-route-guid="@m.UniqueGuid" target="_blank">
+                                                                    Preview Blog Post
+                                                                </a>
+                                                            </li>
+                                                            @if (User.IsInRole("SuperAdmin"))
+                                                            {
+                                                                <li>
+                                                                    <a href="#" class="delete-post" data-id="@m.Id" data-guid="@m.UniqueGuid">
+                                                                        Delete
+                                                                    </a>
+                                                                </li>
+
+                                                            }
+
+
+                                                        </ul>
+                                                    </div>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center">
+                                            <img src="~/themes/back-end/images/no_result.gif" class="no-result" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>*@

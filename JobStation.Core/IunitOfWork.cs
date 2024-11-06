@@ -16,6 +16,8 @@ namespace JobStation.Core
         IErrorLogHistoryRepository ErrorLogHistory { get; }
         IJobTypeRepository JobTypeRepository { get; }
         IJobLocationRepository JobLocationRepository { get; }
+        IOrganisationRepository OrganisationRepository { get; }
+        IJobOfferRepository JobOfferRepository { get; }
         int SaveChanges();
         Task<int> SaveChangesAsync();
     }

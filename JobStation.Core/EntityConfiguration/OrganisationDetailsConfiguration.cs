@@ -61,13 +61,13 @@ namespace JobStation.Core.EntityConfiguration
             builder.Property(x => x.CreatedOn)
                     .HasColumnName("CreatedOn")
                     .HasColumnType("datetimeoffset(7)")
-                    .HasDefaultValueSql("getdate()")
-                    .IsRequired();
+                    .HasDefaultValueSql("getdate()");
+
             builder.Property(x => x.UpdatedOn)
         .HasColumnName("UpdatedOn")
         .HasColumnType("datetimeoffset(7)")
-        .HasDefaultValueSql("getdate()")
-        .IsRequired();
+        .HasDefaultValueSql("getdate()");
+        
 
 
         }

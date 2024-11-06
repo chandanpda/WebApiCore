@@ -14,13 +14,13 @@
         var openTopRatedDoctorsDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<string>() { "/TopRatedDoctors", "/TopRatedDoctors/Index" }) ? "show" : "";
         var openBulkUploadDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<string>() { "/BulkUpload", "/BulkUpload/Index", "/BulkUpload/DoctorUpload" }) ? "show" : "";*@
 
-    var openJobCategoryDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<String>() { "/Category", "/Category/Index" }) ? "show" : "";
-    var openJobTypeDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<String>() { "/Type", "/Type/Index" }) ? "show" : "";
-    var openJobOfferDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<String>() { "/Offer", "/Offer/Index" }) ? "show" : "";
+var openJobDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<String>() { "/Category", "/Category/Index", "/Category/Manage", "/JobType", "/JobType/Index", "/JobType/Manage", "/JobLocation", "/JobLocation/Index", "/JobLocation/Manage", "/JobLocation/Delete" }) ? "show" : "";
+var openJobOfferDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<String>() { "/JobOffer", "/JobOffer/Index", "/JobOffer/Manage" }) ? "show" : "";
+var openOrganisationDropDownMenu = unitOfWork.ActiveMenuService.DropDownActive(currentPageUrl, new List<String>() { "/OrganisationDetails", "/OrganisationDetails/Index", "/OrganisationDetails/Manage", "/OrganisationDetails/Delete" }) ? "show" : "";
 
-    //var profilePicture = unitOfWork.ClaimsService.GetProfilePicture();
-    //var fullName = unitOfWork.ClaimsService.GetFullName();
-    // var role = unitOfWork.ClaimsService.GetRoles(); }
+//var profilePicture = unitOfWork.ClaimsService.GetProfilePicture();
+//var fullName = unitOfWork.ClaimsService.GetFullName();
+// var role = unitOfWork.ClaimsService.GetRoles(); }
 }
     <div class="sidebar_nav scrollable-content">
 
@@ -50,42 +50,52 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle @openJobCategoryDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fal fa-page"></i>  Category
+                        <a class="nav-link dropdown-toggle @openJobDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fal fa-money-bill"></i>  Job
                             <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
                         </a>
-                        <ul class="dropdown-menu @openJobCategoryDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <ul class="dropdown-menu @openJobDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
                             <li>
-                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Category", "/Category/Index"))'
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Category", "/Category/Index","/Category/Manage"))'
                                    asp-area="" asp-controller="Category" asp-action="Index">
-                                    <i class="fal fa-list"></i> Category List
+                                    <i class="fal fa-list-squares"></i> Category
                                 </a>
                             </li>
                             <li>
-                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Category/Manage"))'
-                                   asp-area="" asp-controller="Category" asp-action="Manage">
-                                    <i class="fal fa-plus-circle"></i> Add Category
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/JobType", "/JobType/Index","/JobType/Manage"))'
+                                   asp-area="" asp-controller="JobType" asp-action="Index">
+                                    <i class="fal fa-clipboard-list-check"></i> Type List
                                 </a>
                             </li>
+                            <li>
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/JobLocation", "/JobLocation/Index","/JobLocation/Manage","/JobLocation/Delete"))'
+                                   asp-area="" asp-controller="JobLocation" asp-action="Index">
+                                    <i class="fal fa-location-circle"></i> Locations List
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle @openJobTypeDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fal fa-page"></i>  Type
+                        <a class="nav-link dropdown-toggle @openOrganisationDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fal fa-building"></i>  Organisation
                             <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
                         </a>
-                        <ul class="dropdown-menu @openJobTypeDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <ul class="dropdown-menu @openOrganisationDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
                             <li>
-                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Type", "/Type/Index"))'
-                                   asp-area="" asp-controller="JobType" asp-action="Index">
-                                    <i class="fal fa-list"></i> Type List
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/OrganisationDetails", "/OrganisationDetails/Index"))'
+                                   asp-area="" asp-controller="OrganisationDetails" asp-action="Index">
+                                    <i class="fal fa-building"></i> Organisation List
                                 </a>
                             </li>
-                          
+                           
+
                         </ul>
                     </li>
 
+                   
+                   
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle @openJobOfferDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fal fa-page"></i>  Offer
@@ -93,452 +103,452 @@
                         </a>
                         <ul class="dropdown-menu @openJobOfferDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
                             <li>
-                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Offer", "/Offer/Index"))'
-                                   asp-area="" asp-controller="Offer" asp-action="Index">
-                                    <i class="fal fa-list"></i> Offer List
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/JobOffer", "/JobOffer/Index","JobOffer/Manage"))'
+                                   asp-area="" asp-controller="JobOffer" asp-action="Index">
+                                    <i class="fal fa-list"></i> Job Offers
                                 </a>
                             </li>
-                          
+
                         </ul>
                     </li>
 
 
 
                     @*@if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openPageDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fal fa-page"></i>  Page
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu @openPageDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Post", "/Post/Index"))'
+                               asp-area="" asp-controller="Post" asp-action="Index">
+                                <i class="fal fa-list"></i> Page List
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Post/Manage"))'
+                               asp-area="" asp-controller="Post" asp-action="Manage">
+                                <i class="fal fa-plus-circle"></i> Add Page
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+
+            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Marketing"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openBlogDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fal fa-blog"></i>  Blog
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+
+                    </a>
+                    <ul class="dropdown-menu @openBlogDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogCategory", "/BlogCategory/Index", "/BlogCategory/Manage"))'
+                               asp-area="" asp-controller="BlogCategory" asp-action="Index">
+                                <i class="fal fa-sitemap"></i> Category
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogAuthor", "/BlogAuthor/Index", "/BlogAuthor/Manage"))'
+                               asp-area="" asp-controller="BlogAuthor" asp-action="Index">
+                                <i class="fal fa-users"></i> Author
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogTags", "/BlogTags/Index", "/BlogTags/Manage"))'
+                               asp-area="" asp-controller="BlogTags" asp-action="Index">
+                                <i class="fal fa-tag"></i> Tags
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogPost", "/BlogPost/Index", "/BlogPost/Manage"))'
+                               asp-area="" asp-controller="BlogPost" asp-action="Index">
+                                <i class="fal fa-blog"></i> Post
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogDisclaimer", "/BlogDisclaimer/Index", "/BlogDisclaimer/Manage"))'
+                               asp-area="" asp-controller="BlogDisclaimer" asp-action="Index">
+                                <i class="fal fa-edit"></i> Disclaimer
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Advertisement", "/Advertisement/Index", "/Advertisement/Manage"))'
+                               asp-area="" asp-controller="Advertisement" asp-action="Index">
+                                <i class="fal fa-ad"></i> Advertisement
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogSpecialization", "/BlogSpecialization/Index", "/BlogSpecialization/Manage"))'
+                               asp-area="" asp-controller="BlogSpecialization" asp-action="Index">
+                                <i class="fal fa-shield-check"></i> Specialization
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogClaimingProfile", "/BlogClaimingProfile/Index", "/BlogClaimingProfile/Manage"))'
+                               asp-area="" asp-controller="BlogClaimingProfile" asp-action="Index">
+                                <i class="fal fa-address-card"></i> Claiming Profile
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/NewsletterSubscriber", "/NewsletterSubscriber/Index"))'
+                               asp-area="" asp-controller="NewsletterSubscriber" asp-action="Index">
+                                <i class="fal fa-users"></i> Newsletter Subscribers
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/AdvertisementRequest", "/AdvertisementRequest/Index"))'
+                               asp-area="" asp-controller="AdvertisementRequest" asp-action="Index">
+                                <i class="fal fa-ad"></i> Advertisement Requests
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/PracticeInquiry", "/PracticeInquiry/Index"))'
+                               asp-area="" asp-controller="PracticeInquiry" asp-action="Index">
+                                <i class="fal fa-comment"></i> Practice Inquiries
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openResourcesDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-regular fa-file-lines"></i> Resources
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+
+                    </a>
+                    <ul class="dropdown-menu @openResourcesDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesPostType", "/ResourcesPostType/Index", "/ResourcesPostType/Manage"))'
+                               asp-area="" asp-controller="ResourcesPostType" asp-action="Index">
+                                <i class="fa-solid fa-list"></i> Types
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesCategory", "/ResourcesCategory/Index", "/ResourcesCategory/Manage"))'
+                               asp-area="" asp-controller="ResourcesCategory" asp-action="Index">
+                                <i class="fal fa-sitemap"></i> Category
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesAuthor", "/ResourcesAuthor/Index", "/ResourcesAuthor/Manage"))'
+                               asp-area="" asp-controller="ResourcesAuthor" asp-action="Index">
+                                <i class="fal fa-users"></i> Author
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesTag", "/ResourcesTag/Index", "/ResourcesTag/Manage"))'
+                               asp-area="" asp-controller="ResourcesTag" asp-action="Index">
+                                <i class="fal fa-tag"></i> Tags
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesPost", "/ResourcesPost/Index", "/ResourcesPost/Manage"))'
+                               asp-area="" asp-controller="ResourcesPost" asp-action="Index">
+                                <i class="fal fa-blog"></i> Post
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openEmbedCodeForBadgeDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fal fa-shield"></i>  Badge
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu @openEmbedCodeForBadgeDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/EmbedCodeForBadge", "/EmbedCodeForBadge/Index"))'
+                               asp-area="" asp-controller="EmbedCodeForBadge" asp-action="Index">
+                                <i class="fal fa-list"></i> Badge List
+                            </a>
+                        </li>
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/EmbedCodeForBadge/Manage"))'
+                               asp-area="" asp-controller="EmbedCodeForBadge" asp-action="Manage">
+                                <i class="fal fa-plus-circle"></i> Add Badge
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle @openDoctorDropDownMenu" href="#" id="navbarDropdownDoctorList" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-stethoscope"></i>  Doctors
+                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+
+                </a>
+                <ul class="dropdown-menu @openDoctorDropDownMenu" aria-labelledby="navbarDropdownDoctorList">
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Doctor", "/Doctor/Index"))'
+                           asp-area="" asp-controller="Doctor" asp-action="Index">
+                            <i class="fal fa-users"></i> Doctors
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/DoctorSpeciality", "/DoctorSpeciality/Index"))'
+                           asp-area="" asp-controller="DoctorSpeciality" asp-action="Index">
+                            <i class="fal fa-shield-check"></i> Speciality
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/MedicalSchool", "/MedicalSchool/Index"))'
+                           asp-area="" asp-controller="MedicalSchool" asp-action="Index">
+                            <i class="fal fa-school"></i> Medical School
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/DoctorOrganisation", "/DoctorOrganisation/Index"))'
+                           asp-area="" asp-controller="DoctorOrganisation" asp-action="Index">
+                            <i class="fa-solid fa-sitemap"></i> Organisation
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle @openReportDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fal fa-signal-bars"></i>  Reports
+                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+
+                </a>
+                <ul class="dropdown-menu @openReportDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/DoctorReport"))'
+                           asp-area="" asp-controller="Report" asp-action="DoctorReport">
+                            <i class="fa-regular fa-copy"></i>  All Reports
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/OverviewReport"))'
+                           asp-area="" asp-controller="Report" asp-action="OverviewReport">
+                            <i class="fa-regular fa-copy"></i> Overview
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/RefreshReport"))'
+                           asp-area="" asp-controller="Report" asp-action="RefreshReport">
+                            <i class="fa-regular fa-copy"></i> Refresh
+                        </a>
+                    </li>
+
+
+
+                    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Marketing"))
                     {
-                        if (User.IsInRole("SuperAdmin"))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openPageDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fal fa-page"></i>  Page
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-                                </a>
-                                <ul class="dropdown-menu @openPageDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Post", "/Post/Index"))'
-                                           asp-area="" asp-controller="Post" asp-action="Index">
-                                            <i class="fal fa-list"></i> Page List
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Post/Manage"))'
-                                           asp-area="" asp-controller="Post" asp-action="Manage">
-                                            <i class="fal fa-plus-circle"></i> Add Page
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
-
-                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Marketing"))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openBlogDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fal fa-blog"></i>  Blog
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-
-                                </a>
-                                <ul class="dropdown-menu @openBlogDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogCategory", "/BlogCategory/Index", "/BlogCategory/Manage"))'
-                                           asp-area="" asp-controller="BlogCategory" asp-action="Index">
-                                            <i class="fal fa-sitemap"></i> Category
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogAuthor", "/BlogAuthor/Index", "/BlogAuthor/Manage"))'
-                                           asp-area="" asp-controller="BlogAuthor" asp-action="Index">
-                                            <i class="fal fa-users"></i> Author
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogTags", "/BlogTags/Index", "/BlogTags/Manage"))'
-                                           asp-area="" asp-controller="BlogTags" asp-action="Index">
-                                            <i class="fal fa-tag"></i> Tags
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogPost", "/BlogPost/Index", "/BlogPost/Manage"))'
-                                           asp-area="" asp-controller="BlogPost" asp-action="Index">
-                                            <i class="fal fa-blog"></i> Post
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogDisclaimer", "/BlogDisclaimer/Index", "/BlogDisclaimer/Manage"))'
-                                           asp-area="" asp-controller="BlogDisclaimer" asp-action="Index">
-                                            <i class="fal fa-edit"></i> Disclaimer
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Advertisement", "/Advertisement/Index", "/Advertisement/Manage"))'
-                                           asp-area="" asp-controller="Advertisement" asp-action="Index">
-                                            <i class="fal fa-ad"></i> Advertisement
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogSpecialization", "/BlogSpecialization/Index", "/BlogSpecialization/Manage"))'
-                                           asp-area="" asp-controller="BlogSpecialization" asp-action="Index">
-                                            <i class="fal fa-shield-check"></i> Specialization
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/BlogClaimingProfile", "/BlogClaimingProfile/Index", "/BlogClaimingProfile/Manage"))'
-                                           asp-area="" asp-controller="BlogClaimingProfile" asp-action="Index">
-                                            <i class="fal fa-address-card"></i> Claiming Profile
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/NewsletterSubscriber", "/NewsletterSubscriber/Index"))'
-                                           asp-area="" asp-controller="NewsletterSubscriber" asp-action="Index">
-                                            <i class="fal fa-users"></i> Newsletter Subscribers
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/AdvertisementRequest", "/AdvertisementRequest/Index"))'
-                                           asp-area="" asp-controller="AdvertisementRequest" asp-action="Index">
-                                            <i class="fal fa-ad"></i> Advertisement Requests
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/PracticeInquiry", "/PracticeInquiry/Index"))'
-                                           asp-area="" asp-controller="PracticeInquiry" asp-action="Index">
-                                            <i class="fal fa-comment"></i> Practice Inquiries
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openResourcesDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-regular fa-file-lines"></i> Resources
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-
-                                </a>
-                                <ul class="dropdown-menu @openResourcesDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesPostType", "/ResourcesPostType/Index", "/ResourcesPostType/Manage"))'
-                                           asp-area="" asp-controller="ResourcesPostType" asp-action="Index">
-                                            <i class="fa-solid fa-list"></i> Types
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesCategory", "/ResourcesCategory/Index", "/ResourcesCategory/Manage"))'
-                                           asp-area="" asp-controller="ResourcesCategory" asp-action="Index">
-                                            <i class="fal fa-sitemap"></i> Category
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesAuthor", "/ResourcesAuthor/Index", "/ResourcesAuthor/Manage"))'
-                                           asp-area="" asp-controller="ResourcesAuthor" asp-action="Index">
-                                            <i class="fal fa-users"></i> Author
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesTag", "/ResourcesTag/Index", "/ResourcesTag/Manage"))'
-                                           asp-area="" asp-controller="ResourcesTag" asp-action="Index">
-                                            <i class="fal fa-tag"></i> Tags
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/ResourcesPost", "/ResourcesPost/Index", "/ResourcesPost/Manage"))'
-                                           asp-area="" asp-controller="ResourcesPost" asp-action="Index">
-                                            <i class="fal fa-blog"></i> Post
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openEmbedCodeForBadgeDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fal fa-shield"></i>  Badge
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-                                </a>
-                                <ul class="dropdown-menu @openEmbedCodeForBadgeDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/EmbedCodeForBadge", "/EmbedCodeForBadge/Index"))'
-                                           asp-area="" asp-controller="EmbedCodeForBadge" asp-action="Index">
-                                            <i class="fal fa-list"></i> Badge List
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/EmbedCodeForBadge/Manage"))'
-                                           asp-area="" asp-controller="EmbedCodeForBadge" asp-action="Manage">
-                                            <i class="fal fa-plus-circle"></i> Add Badge
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle @openDoctorDropDownMenu" href="#" id="navbarDropdownDoctorList" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-stethoscope"></i>  Doctors
-                                <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/DataMarketPlaceReport", "/Report/DataMarketPlaceReportById"))'
+                               asp-area="" asp-controller="Report" asp-action="DataMarketPlaceReport">
+                                <i class="fa-regular fa-copy"></i> Data Market Place
                             </a>
-                            <ul class="dropdown-menu @openDoctorDropDownMenu" aria-labelledby="navbarDropdownDoctorList">
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Doctor", "/Doctor/Index"))'
-                                       asp-area="" asp-controller="Doctor" asp-action="Index">
-                                        <i class="fal fa-users"></i> Doctors
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/DoctorSpeciality", "/DoctorSpeciality/Index"))'
-                                       asp-area="" asp-controller="DoctorSpeciality" asp-action="Index">
-                                        <i class="fal fa-shield-check"></i> Speciality
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/MedicalSchool", "/MedicalSchool/Index"))'
-                                       asp-area="" asp-controller="MedicalSchool" asp-action="Index">
-                                        <i class="fal fa-school"></i> Medical School
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/DoctorOrganisation", "/DoctorOrganisation/Index"))'
-                                       asp-area="" asp-controller="DoctorOrganisation" asp-action="Index">
-                                        <i class="fa-solid fa-sitemap"></i> Organisation
-                                    </a>
-                                </li>
-
-                            </ul>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle @openReportDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fal fa-signal-bars"></i>  Reports
-                                <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/PartnerShipReport", "/Report/PartnerShipFullPaymentReportByID"))'
+                               asp-area="" asp-controller="Report" asp-action="PartnerShipReport">
+                                <i class="fa-regular fa-copy"></i> PartnerShip Payment
                             </a>
-                            <ul class="dropdown-menu @openReportDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/DoctorReport"))'
-                                       asp-area="" asp-controller="Report" asp-action="DoctorReport">
-                                        <i class="fa-regular fa-copy"></i>  All Reports
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/OverviewReport"))'
-                                       asp-area="" asp-controller="Report" asp-action="OverviewReport">
-                                        <i class="fa-regular fa-copy"></i> Overview
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/RefreshReport"))'
-                                       asp-area="" asp-controller="Report" asp-action="RefreshReport">
-                                        <i class="fa-regular fa-copy"></i> Refresh
-                                    </a>
-                                </li>
-
-                               
-
-                                @if (User.IsInRole("SuperAdmin") || User.IsInRole("Marketing"))
-                                {
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/DataMarketPlaceReport", "/Report/DataMarketPlaceReportById"))'
-                                           asp-area="" asp-controller="Report" asp-action="DataMarketPlaceReport">
-                                            <i class="fa-regular fa-copy"></i> Data Market Place
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/PartnerShipReport", "/Report/PartnerShipFullPaymentReportByID"))'
-                                           asp-area="" asp-controller="Report" asp-action="PartnerShipReport">
-                                            <i class="fa-regular fa-copy"></i> PartnerShip Payment
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/PaidPromotionReport", "/Report/PaidPromotionFullPaymentReportByID"))'
-                                           asp-area="" asp-controller="Report" asp-action="PaidPromotionReport">
-                                            <i class="fa-regular fa-copy"></i> Paid Promotion
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/TopRatedDoctors", "/TopRatedDoctors/Index"))'
-                                           asp-area="" asp-controller="TopRatedDoctors" asp-action="Index">
-                                            <i class="fa-regular fa-copy"></i> Top Rated
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/FeedbackReport"))'
-                                           asp-area="" asp-controller="Report" asp-action="FeedbackReport">
-                                            <i class="fa-regular fa-copy"></i> Feedback
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/ComplimentaryReport"))'
-                                           asp-area="" asp-controller="Report" asp-action="ComplimentaryReport">
-                                            <i class="fa-regular fa-copy"></i> Complimentary
-                                        </a>
-                                    </li>
-
-
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/ContactUs", "/ContactUs/Index"))'
-                                           asp-area="" asp-controller="ContactUs" asp-action="Index">
-                                            <i class="fa-regular fa-copy"></i> Contact Us
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/PageVisitorsReport"))'
-                                           asp-area="" asp-controller="Report" asp-action="PageVisitorsReport">
-                                            <i class="fa-regular fa-copy"></i> PageVisitors
-                                        </a>
-                                    </li>
-                                }
-                            </ul>
                         </li>
-
-                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("DataAnalyst"))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openBulkUploadDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fal fa-upload"></i>  Bulk Upload
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-                                </a>
-                                <ul class="dropdown-menu @openBulkUploadDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    @if (User.IsInRole("SuperAdmin"))
-                                    {
-                                        <li>
-                                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/BulkUpload","/Index"))' asp-area="" asp-controller="BulkUpload" asp-action="Index">
-                                                <i class="fa-regular fa-file"></i> All Details
-                                            </a>
-                                        </li>
-                                    }
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/BulkUpload","/Upload"))' asp-area="" asp-controller="BulkUpload" asp-action="Upload">
-                                            <i class="fa-regular fa-file"></i> Uploads
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
-
-                        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Marketing"))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openPurchaseReportDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fal fa-money-bill"></i>  Purchase <span style="font-size:10px">( Home Search )</span>
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-                                </a>
-                                <ul class="dropdown-menu @openPurchaseReportDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    <li>
-                                        <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/PurchaseReport", "/Report/SearchReport"))'
-                                           asp-area="" asp-controller="Report" asp-action="SearchReport">
-                                            <i class="fa-regular fa-search"></i> Search Report
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/PurchaseReport","/Report/PurchaseReport"))'
-                                           asp-area="" asp-controller="Report" asp-action="PurchaseReport">
-                                            <i class="fal fa-money-bill"></i> Purchase Report
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item">
-                                <a asp-area="" asp-controller="UserPayment" asp-action="Index" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/UserPayment", "/UserPayment/Index"))'>
-                                    <i class="fal fa-money-bill"></i> Client Payment
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a asp-area="" asp-controller="Coupon" asp-action="Index" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/Coupon", "/Coupon/Index"))'>
-                                    <i class="fal fa-cards"></i> Coupons
-                                </a>
-                            </li>
-
-                            @if (User.IsInRole("SuperAdmin"))
-                            {
-                                <li class="nav-item">
-                                    <a class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/PageRedirection", "/PageRedirection/Index"))'
-                                       asp-area="" asp-controller="PageRedirection" asp-action="Index">
-                                        <i class="fal fa-toolbox fa-lg"></i> Page Redirection
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Admin" asp-action="Setting" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/Admin/Setting"))' aria-current="page">
-                                        <i class="fal fa-gear"></i> Global Settings
-                                    </a>
-                                </li>
-                            }
-                        }
-
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="Account" asp-action="MyProfile" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/MyProfile"))' aria-current="page">
-                                <i class="fal fa-user"></i> My Profile
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/PaidPromotionReport", "/Report/PaidPromotionFullPaymentReportByID"))'
+                               asp-area="" asp-controller="Report" asp-action="PaidPromotionReport">
+                                <i class="fa-regular fa-copy"></i> Paid Promotion
                             </a>
                         </li>
 
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/TopRatedDoctors", "/TopRatedDoctors/Index"))'
+                               asp-area="" asp-controller="TopRatedDoctors" asp-action="Index">
+                                <i class="fa-regular fa-copy"></i> Top Rated
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/FeedbackReport"))'
+                               asp-area="" asp-controller="Report" asp-action="FeedbackReport">
+                                <i class="fa-regular fa-copy"></i> Feedback
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/ComplimentaryReport"))'
+                               asp-area="" asp-controller="Report" asp-action="ComplimentaryReport">
+                                <i class="fa-regular fa-copy"></i> Complimentary
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/ContactUs", "/ContactUs/Index"))'
+                               asp-area="" asp-controller="ContactUs" asp-action="Index">
+                                <i class="fa-regular fa-copy"></i> Contact Us
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/Report/PageVisitorsReport"))'
+                               asp-area="" asp-controller="Report" asp-action="PageVisitorsReport">
+                                <i class="fa-regular fa-copy"></i> PageVisitors
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+
+            @if (User.IsInRole("SuperAdmin") || User.IsInRole("DataAnalyst"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openBulkUploadDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fal fa-upload"></i>  Bulk Upload
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu @openBulkUploadDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
                         @if (User.IsInRole("SuperAdmin"))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle @openProfileDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fal fa-users"></i>  Login Users
-                                    <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
-
+                            <li>
+                                <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/BulkUpload","/Index"))' asp-area="" asp-controller="BulkUpload" asp-action="Index">
+                                    <i class="fa-regular fa-file"></i> All Details
                                 </a>
-                                <ul class="dropdown-menu @openProfileDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
-                                    @if (User.IsInRole("SuperAdmin"))
-                                    {
-                                        <li>
-                                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/RegisterUserList"))'
-                                               asp-area="" asp-controller="Account" asp-action="RegisterUserList">
-                                                <i class="fal fa-user"></i> Users
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/RegisterActivityTracking"))'
-                                               asp-area="" asp-controller="Account" asp-action="RegisterUserActivityTracking">
-                                                <i class="fal fa-user"></i> Activity Tracking
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/ChangePassword"))'
-                                               asp-area="" asp-controller="Account" asp-action="ChangePassword">
-                                                <i class="fal fa-key"></i> Change Password
-                                            </a>
-                                        </li>
-
-                                    }
-                                </ul>
                             </li>
                         }
-
-                        <li class="nav-item">
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class='nav-link' aria-current="page" target="_blank">
-                                <i class="fal fa-globe"></i> Go To Website
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/BulkUpload","/Upload"))' asp-area="" asp-controller="BulkUpload" asp-action="Upload">
+                                <i class="fa-regular fa-file"></i> Uploads
                             </a>
                         </li>
+                    </ul>
+                </li>
+            }
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">
-                                <i class="fal fa-sign-out-alt"></i> Logout
+            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Marketing"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openPurchaseReportDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fal fa-money-bill"></i>  Purchase <span style="font-size:10px">( Home Search )</span>
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+                    </a>
+                    <ul class="dropdown-menu @openPurchaseReportDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        <li>
+                            <a class='dropdown-item @(unitOfWork.ActiveMenuService.ActivateMenu("/PurchaseReport", "/Report/SearchReport"))'
+                               asp-area="" asp-controller="Report" asp-action="SearchReport">
+                                <i class="fa-regular fa-search"></i> Search Report
                             </a>
                         </li>
-                    }*@
+                        <li>
+                            <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/PurchaseReport","/Report/PurchaseReport"))'
+                               asp-area="" asp-controller="Report" asp-action="PurchaseReport">
+                                <i class="fal fa-money-bill"></i> Purchase Report
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="UserPayment" asp-action="Index" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/UserPayment", "/UserPayment/Index"))'>
+                        <i class="fal fa-money-bill"></i> Client Payment
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Coupon" asp-action="Index" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/Coupon", "/Coupon/Index"))'>
+                        <i class="fal fa-cards"></i> Coupons
+                    </a>
+                </li>
+
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <li class="nav-item">
+                        <a class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/PageRedirection", "/PageRedirection/Index"))'
+                           asp-area="" asp-controller="PageRedirection" asp-action="Index">
+                            <i class="fal fa-toolbox fa-lg"></i> Page Redirection
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Admin" asp-action="Setting" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/Admin/Setting"))' aria-current="page">
+                            <i class="fal fa-gear"></i> Global Settings
+                        </a>
+                    </li>
+                }
+            }
+
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Account" asp-action="MyProfile" class='nav-link @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/MyProfile"))' aria-current="page">
+                    <i class="fal fa-user"></i> My Profile
+                </a>
+            </li>
+
+            @if (User.IsInRole("SuperAdmin"))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @openProfileDropDownMenu" href="#" id="navbarDropdownProfileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fal fa-users"></i>  Login Users
+                        <span aria-expanded="false" class="drp-arrow dropdown-toggle" data-toggle="dropdown"> <i class="fal fa-angle-down"></i></span>
+
+                    </a>
+                    <ul class="dropdown-menu @openProfileDropDownMenu" aria-labelledby="navbarDropdownProfileLink">
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+                            <li>
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/RegisterUserList"))'
+                                   asp-area="" asp-controller="Account" asp-action="RegisterUserList">
+                                    <i class="fal fa-user"></i> Users
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/RegisterActivityTracking"))'
+                                   asp-area="" asp-controller="Account" asp-action="RegisterUserActivityTracking">
+                                    <i class="fal fa-user"></i> Activity Tracking
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class='dropdown-item  @(unitOfWork.ActiveMenuService.ActivateMenu("/Account/ChangePassword"))'
+                                   asp-area="" asp-controller="Account" asp-action="ChangePassword">
+                                    <i class="fal fa-key"></i> Change Password
+                                </a>
+                            </li>
+
+                        }
+                    </ul>
+                </li>
+            }
+
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class='nav-link' aria-current="page" target="_blank">
+                    <i class="fal fa-globe"></i> Go To Website
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="fal fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+        }*@
                 </ul>
             </div>
         </nav>

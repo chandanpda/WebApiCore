@@ -21,6 +21,8 @@ namespace JobStation.API
             services.AddTransient<IErrorLogHistoryRepository, ErrorLogHistoryRepository>();
             services.AddTransient<IJobTypeRepository, JobTypeRepository>();
             services.AddTransient<IJobLocationRepository, JobLocationRepository>();
+            services.AddTransient<IOrganisationRepository, OrganisationRepository>();
+            services.AddTransient<IJobOfferRepository, JobOfferRepository>();
 
             return services;
         }

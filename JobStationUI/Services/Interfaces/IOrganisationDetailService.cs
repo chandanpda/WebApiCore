@@ -11,7 +11,8 @@ namespace JobStationUI.Services.Interfaces
 {
     public interface IOrganisationDetailService
     {
-        Task<IRestResponse<Response<List<OrganisationDetailsDto>>>> Get(string q);
+        Task<IRestResponse<Response<List<OrganisationDetailsDto>>>> Get(string q = "");
+        Task<IRestResponse<Response<OrganisationDetailsDto>>> GetById(int id);
         Task<IRestResponse<Response<OrganisationDetailsDto>>> GetByGuid(string Uniqueguid);
         Task<IRestResponse<Response<OrganisationDetailsDto>>> Add(OrganisationDetailsModel model);
         Task<IRestResponse<Response<OrganisationDetailsDto>>> Update(int id, OrganisationDetailsModel model);

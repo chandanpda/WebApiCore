@@ -1,0 +1,155 @@
+﻿@model OrganisationDetailsModel
+@inject IUnitOfWork unitOfWork
+@{
+    ViewData["Title"] = "Manage Organisations";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="dashboard_main">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-12">
+                <div class="dashboard_main_heading">
+                    <div class="heading_left">
+                        @if (Model.Id > 0)
+                        {
+                            <h2>Update Organisation Details</h2>
+                        }
+                        else
+                        {
+                            <h2>Add Organisation Details</h2>
+                        }
+                    </div>
+                    <div class="heading_right">
+                        <a class="btn-main" asp-area="" asp-controller="OrganisationDetails" asp-action="Index" asp-route-projectGuid="@ViewBag.ProjectGuid">
+                            <i class="fa fa-arrow-circle-left"></i> Back to Organisation Details List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_main_body">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-8">
+                    <div class="website_settings">
+                        <form name="organisationDetailsForm"
+                              action="/organisationDetails/manage"
+                              method="post"
+                              id="organisationDetailsForm"
+                              enctype="multipart/form-data">
+                            @*<div asp-validation-summary="ModelOnly"></div>*@
+                            <input type="hidden" id="Id" name="Id" asp-for="Id" />
+                            <input type="hidden" id="UniqueGuid" asp-for="UniqueGuid" />
+                            @*<input type="hidden" asp-for="ProfilePicture" />
+                                <input type="hidden" asp-for="ProfilePictureWebp" />*@
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Organisation Name*</label>
+                                        <input type="text" id="OrganisationName" name="OrganisationName" placeholder="OrganisationName*" asp-for="OrganisationName" class="form-control">
+                                        @*<span asp-validation-for="OrganisationName" class="text-danger"></span>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Domain*</label>
+                                        <input type="text" id="Domain" name="Domain" placeholder="Domain*" asp-for="Domain" class="form-control">
+                                        @*<span asp-validation-for="Domain" class="text-danger"></span>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Established Year*</label>
+                                        <input type="text" id="EstablishedYear" name="EstablishedYear" placeholder="Established Year*" asp-for="EstablishedYear" class="form-control">
+                                        @*<span asp-validation-for="EstablishedYear" class="text-danger"></span>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Email*</label>
+                                        <input type="text" id="Email" name="Email" placeholder="Email*" asp-for="Email" class="form-control">
+                                        @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Website*</label>
+                                        <input type="text" id="Url" name="Url" placeholder="www.xyz.com*" asp-for="Url" class="form-control">
+                                        @*<span asp-validation-for="Url" class="text-danger"></span>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group text-center">
+                                    <input type="submit" class="btn btn-main organisationDetailsFormBtn " id="organisationDetailsFormBtn" value="Save" />
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>  
+
+    $(document).on('submit', '#organisationDetailsForm', function (e) {
+
+        e.preventDefault();
+        var formData = $(this).serialize();
+        var buttonText = $('#organisationDetailsFormBtn').text();
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: formData,
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.msg);
+                    setTimeout(function () {
+                        window.location.href = '/OrganisationDetails/Index'
+                    }, 2000);
+                }
+                else {
+                    $('.ajax-loader').addClass('d-none');
+                    toastr.error(data.msg);
+                    $('#organisationDetailsFormBtn').removeAttr('disabled');
+                    $('#organisationDetailsFormBtn').text(buttonText);
+                }
+            },
+            error: function (err, res) {
+
+            },
+            beforeSend: function () {
+                $('#organisationDetailsFormBtn').attr('disabled', 'disabled').text('Please wait...');
+            }
+        });
+
+    });
+    </script>
+
+
+}

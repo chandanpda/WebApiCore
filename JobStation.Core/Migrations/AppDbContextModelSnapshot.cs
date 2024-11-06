@@ -169,10 +169,9 @@ namespace JobStation.Core.Migrations
                         .HasColumnName("Id")
                         .UseIdentityColumn();
 
-                    b.Property<string>("CompanyId")
-                        .IsRequired()
+                    b.Property<int>("CompanyId")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("int")
                         .HasColumnName("Company");
 
                     b.Property<DateTimeOffset>("CreatedOn")
@@ -201,22 +200,19 @@ namespace JobStation.Core.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CategoryId");
 
-                    b.Property<string>("JobTypeId")
-                        .IsRequired()
+                    b.Property<int>("JobTypeId")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("int")
                         .HasColumnName("JobType");
 
-                    b.Property<string>("LocationId")
-                        .IsRequired()
+                    b.Property<int>("LocationId")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("int")
                         .HasColumnName("Location");
 
-                    b.Property<string>("Salary")
-                        .IsRequired()
+                    b.Property<double>("Salary")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("float")
                         .HasColumnName("Salary");
 
                     b.Property<string>("Title")

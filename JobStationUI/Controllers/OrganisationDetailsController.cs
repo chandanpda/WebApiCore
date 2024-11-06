@@ -38,10 +38,16 @@ namespace JobStationUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Manage([FromQuery] string guid)
         {
-            var model = new OrganisationDetailsModel() { };
+            var model = new OrganisationDetailsModel()
+            {
+            };
             var organisationDetailsResponse = await unitOfWork.OrganisationDetailService.GetByGuid(guid);
             if (organisationDetailsResponse != null && organisationDetailsResponse.StatusCode == HttpStatusCode.OK && organisationDetailsResponse.Data.Data != null)
-                model = mapper.Map<OrganisationDetailsModel>(organisationDetailsResponse.Data.Data);
+            {
+                 model = mapper.Map<OrganisationDetailsModel>(organisationDetailsResponse.Data.Data);
+                
+            }
+            
             return View(model);
 
         }
@@ -56,6 +62,7 @@ namespace JobStationUI.Controllers
             }
 
             IRestResponse<Response<OrganisationDetailsDto>> OrganisationDetailsResponse;
+            var message = "";
             var organisationDetails = await unitOfWork.OrganisationDetailService.GetByGuid(model.UniqueGuid);
             if (organisationDetails != null && organisationDetails.StatusCode == HttpStatusCode.OK && organisationDetails.Data.Data != null)
                 OrganisationDetailsResponse = await unitOfWork.OrganisationDetailService.Update(model.Id, model);
@@ -65,30 +72,52 @@ namespace JobStationUI.Controllers
             if (OrganisationDetailsResponse != null && (OrganisationDetailsResponse.StatusCode == HttpStatusCode.Created || 
                 OrganisationDetailsResponse.StatusCode == HttpStatusCode.OK) && OrganisationDetailsResponse.Data.Data != null)
             {
+                //TempData["type"] = "success";
+                //TempData["message"] = "Record saved successfully";
+
+                //return RedirectToAction("Index", "OrganisationDetails");
+                message = "Record saved successfully.";
                 TempData["type"] = "success";
-                TempData["message"] = "Record saved successfully";
-
-                return RedirectToAction("Index", "OrganisationDetails");
+                return Json(new { success = true, msg = @message });
             }
+          
+            return Json(new { success = false, msg = "Some error occured" });
+        }
 
-            if (OrganisationDetailsResponse != null && OrganisationDetailsResponse.StatusCode == HttpStatusCode.BadRequest)
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var organisation = await unitOfWork.OrganisationDetailService.GetById(id);
+            if (organisation == null || organisation.StatusCode != HttpStatusCode.OK || organisation.Data.Data == null)
+                return Json(new { success = false, msg = "Invalid Organisation" });
+
+            var organisationResponse = await unitOfWork.OrganisationDetailService.Delete(id);
+
+            if (organisationResponse != null && organisationResponse.StatusCode == HttpStatusCode.NoContent)
+                return Json(new { success = true, msg = "Organisation deleted successfully" });
+
+            if (organisationResponse != null && organisationResponse.Data != null)
             {
-                var errorMessage = OrganisationDetailsResponse.Data.ErrorCode;
-                if (OrganisationDetailsResponse.Data.Errors != null)
+                if (organisationResponse.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    errorMessage = "";
-                    foreach (var error in OrganisationDetailsResponse.Data.Errors)
+                    var errorMessage = organisationResponse.Data.ErrorCode;
+                    if (organisationResponse.Data.Errors != null)
                     {
-                        errorMessage = string.IsNullOrWhiteSpace(errorMessage) ? error : $"<br/>{error}";
+                        errorMessage = "";
+                        foreach (var error in organisationResponse.Data.Errors)
+                        {
+                            errorMessage = string.IsNullOrWhiteSpace(errorMessage) ? error : $"<br/>{error}";
+                        }
                     }
+
+                    return Json(new { success = false, msg = errorMessage });
                 }
 
-                ModelState.AddModelError("", errorMessage);
-                return View(model);
+                return Json(new { success = false, msg = organisationResponse.Data.ErrorCode });
             }
 
-            ModelState.AddModelError("", "Some error occured");
-            return View(model);
+            return Json(new { success = false, msg = "Some error occured" });
         }
     }
 }

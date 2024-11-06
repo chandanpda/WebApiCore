@@ -43,13 +43,13 @@ namespace JobStation.Core.EntityConfiguration
 
             builder.Property(x => x.JobTypeId)
               .HasColumnName("JobType")
-              .HasColumnType("nvarchar")
+              .HasColumnType("int")
               .HasMaxLength(100)
               .IsRequired();
 
             builder.Property(x => x.CompanyId)
              .HasColumnName("Company")
-             .HasColumnType("nvarchar")
+             .HasColumnType("int")
              .HasMaxLength(100)
              .IsRequired();
 
@@ -66,13 +66,13 @@ namespace JobStation.Core.EntityConfiguration
 
             builder.Property(x => x.Salary)
               .HasColumnName("Salary")
-              .HasColumnType("nvarchar")
+              .HasColumnType("float")
               .HasMaxLength(100)
               .IsRequired();
 
             builder.Property(x => x.LocationId)
               .HasColumnName("Location")
-              .HasColumnType("nvarchar")
+              .HasColumnType("int")
               .HasMaxLength(100)
               .IsRequired();
 
